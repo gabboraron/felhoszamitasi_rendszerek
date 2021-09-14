@@ -16,10 +16,14 @@ Ajánlott irodalom:
 > - **féléves feladat**ra 5 oldal dokumentáció, és érdemes a diplomamunkával összekötni és egy részét megvalósítani és azt leadni
 > - 12. hét vasárnap éjjfél a határidő
 > - prezentáció 5 perc
-> 
+> - 5 oldalas doksi
+> - 7. hét végig leadni
 > 12. héten zh (szóbeli is lehet (8 perc ~ 1 téma) online oktatás esetén) offline esetén írásbeli
 > 
-> 
+> **Vizsga**
+>
+> vizsgáztatás ábrákkal, mutatni vagy akár felrajzolni
+>
 
 -------
 
@@ -55,3 +59,46 @@ A felhő egy modell, on-demand alapú, konfigurálható számítási kapacitáss
 
 https://www.optimizely.com/insights/blog/pizza-as-a-service/
 
+## GY2
+
+belépés `eth0` címmel a b​öngészőben
+
+## GY2
+### Keystone
+
+A keystoneban lévő `user`hez lehet jogosultságokat rendelni, tehát az abba való authentikációt nem az kezeli.
+
+Az openstacken létrehozott domainek között nincs átláthatóság
+A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.
+
+
+| | |
+| ------------- |:-------------:| 
+| Az openstacken létrehozott domainek között nincs átláthatóság | ![projekt alfelosztás](https://s3.amazonaws.com/madorn.com/images/ss.png)|
+| A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.| ![domain-projekt kapcsolat](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.04.26%20PM.png)|
+| Az openstacken létrehozott domainek között nincs átláthatóság | ![projekt alfelosztás](https://s3.amazonaws.com/madorn.com/images/ss.png)| |
+
+A felhasználókhoz szerepeket köthetünk.
+
+beSSHzunk Puttyal `openstack@ip`.
+
+
+1 vCPU mellé 2gb RAM
+egy gép min 2 vCPU - 4gb RAM
+
+hard limit az, hogy gey copmute serveren milyen gépet hozunk létre!
+
+#### konfiguráció webes guin át
+> a gui csak az adott ipn található openstackel tud kommunikálni
+`Project` > `instances` itt látszanak a gépek
+`Project` > `Ovierview` itt a megadott hardware megk​tések látszanak
+`Identity` > `Projects` létrehozott projektek és azokhoz tartozó allokált hardware k​​vetelmények
+
+#### konfiguráció parancssoron át
+> a parancssori kliens bármely openstacket tudja kezelni
+
+`openstack` parancs, jelszó `openstack`
+- `source`
+- `openrc`
+
+mindig copy az eredeti settings fájlt és azt módosítsuk!
