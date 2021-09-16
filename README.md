@@ -102,3 +102,49 @@ hard limit az, hogy gey copmute serveren milyen gépet hozunk létre!
 - `openrc`
 
 mindig copy az eredeti settings fájlt és azt módosítsuk!
+
+# EA2
+![cloud reference model i](https://www.researchgate.net/profile/Abbas_Strommen-Bakhtiar/publication/278657825/figure/fig7/AS:790968647299072@1565593029417/IaaS-vs-PaaS-vs-SaaS-Source-Kates-Comments-2010-4.png)
+
+
+> ### Privát felhő:
+> 
+> Egy szervezet férhet hozzá a felhőhöz, de annak helye nem feltétlen a szervezetnél van, ki lehet szervezve akár! A felhő akár adott projekthez van konfigurálva ilyen esetben.
+
+> ### Közösségi felhő
+> 
+> Szintén csak a szervezetférhet hozzá, de szintén nem feltétlen van helyileg a szervezetnél, de olyannak van felkonfigurálva ami pont a szervezet ígényeit elégíti ki.
+
+
+> ### Publikus felhő
+> 
+> Bárki hozzáférhet, kivéve akiknek nem engedjük (Irán, tálibok, stb)
+
+
+> ### Hibrid felhő
+> - Publikus és Privát felhők kapcsolata hálózatba rendezve.
+> - Az adatok/alkalmazások eloszlanak a különböző felhők között.
+>
+> ![hybrid cloud](https://nttdata-solutions.com/wp-content/usermedia/blog-what-is-a-hybrid-cloud-infographic.png)
+
+![felhők használatának tipikus mintái](https://labs.eleks.com/wp-content/uploads/2012/12/cc-patterns.png)
+
+> ### Predictable bursting
+> Egy híroldal terheltsége más órákban nő meg mint egy könyvelő szerveré, tehát a felhő mögötte az képes egyneletesen "leterhelődni".
+
+## Felhő felhasználás előnyei
+- alacsony költség, merta szolgáltatóknak megvan a technológiája hozzá, sok felhasználóval
+- Könnyű felhasználhatóság: hamar elérhetőek licenszes termékek akár
+- Guality of service: 99,999% hogy egy s3as trolón nincs adatvesztés.
+- megbízhatóság
+- kiszervezett IT menedzsment:it szzolgáltatások kiszervezése olcsóbb mint saját it állományt fenntartani.
+- simplified mantenece and upgrade: könnyen és gyorsan elérhetőek a frissítések.
+- nagyon olcsón lehet hozzákezdeni
+
+## Felhőt szolgáltatni miért jó
+- profit
+- optimalizálás: egyébként kihasználatlanul álló gépeket megnyitunk publikusnak
+- stratégia: fenchise védelem, windows  azure
+- kiszervezés: IBM-hez kiszervezi a számítást, könyvelést
+- brand szempontjából terület megjelölés: Google app engine
+- platform: kapcsolat a vevőkkel: salesforce.com force.com  
