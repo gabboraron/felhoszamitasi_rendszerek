@@ -6,7 +6,7 @@
 Ajánlott irodalom:
 
 - [Matt Dorn: Preparing for the Certified OpenStack Administrator Exam, Packt, 2017](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam)
-  - [coa-aio-newton.ova](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam/blob/master/coa-aio-newton.ova) *fájlt letöltve fut a demo VM `openstack` a login és jelszó weben `admin` a login és jelszó*
+  - [coa-aio-newton.ova](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam/blob/master/coa-aio-newton.ova) *fájlt letöltve fut a demo VM `openstack` a login és jelszó weben `admin` a login és jelszó*, belépés `eth0` címmel a böngészőben
 - [Anne Gentle, Diane Fleming, Everett Toews, Joe Topjian, Jonathan Proulx, Lorin Hochstein, Tom Fifield: OpenStack Operations Guide. O`Reilly, 2014 (elektronikus jegyzet)](http://www.stilson.net/documentation/OpenStack%20Operations%20Guide.pdf)
 - [Scott Adkins, John Belamaric, Vincent Giersch, Denys Makogon, Jason E. Robinson: OpenStack Cloud Application Development. Wiley, 2016 (elektronikus jegyzet)](https://allitbooks.net/download-file.html)
 
@@ -58,10 +58,6 @@ A felhő egy modell, on-demand alapú, konfigurálható számítási kapacitáss
 - ha viszont nekem az időm drágább akkor SaaS jobb
 
 https://www.optimizely.com/insights/blog/pizza-as-a-service/
-
-## GY2
-
-belépés `eth0` címmel a b​öngészőben
 
 ## GY2
 ### Keystone
@@ -148,3 +144,39 @@ mindig copy az eredeti settings fájlt és azt módosítsuk!
 - kiszervezés: IBM-hez kiszervezi a számítást, könyvelést
 - brand szempontjából terület megjelölés: Google app engine
 - platform: kapcsolat a vevőkkel: salesforce.com force.com  
+
+## GY3
+### Glence
+Amikor kérünk egy gépet a felhőben akkor annak általában nincs operációs rendszere vagy ha van nem olyan mint szeretnénk, ezért érdemes olyant telepíteni amit szeetnénk telepíteni.
+Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/focal/release/) innen a `kvm` szót tartalmazót ha telepítjük, mert ha virtualboxosat telepítünk akkor a `.ova` fájl kell. [Debian](http://cloud.debian.org/images/cloud/)ra is létezik felhős image.
+
+> #### Hogy tudunk a felhasználónak előre elkészítnei egy ubuntut pl dockerrel:
+> 1. leteöltjük a vmet, azt futtatjuk, majd azon belül tlepítjük a dockert és az így keletkezett vm-et leállítjuk és feltöltjük.
+> 2. [openstack disk image builder](https://docs.openstack.org/diskimage-builder/latest/) projektét használva, de csak openstacken működik, szóval AWSre pl nem alkalmas.
+> 3. [hashicorp packer](https://www.packer.io/) ugyanaz mint az openstackes csak nem felhő függő, használható bármilyen felhőhöz. Azért előnyös mert könnyen lehet frissítéseket bepipeolni a felhőbe a különböző imagek frissítéséhez pl.
+> 4. [oracle virtualbox](https://www.virtualbox.org/)
+
+> #### image formátumok:
+>  - **QCOW2:** tömöríti az imaget, és növeli addig amíg eléri amximum beállított értéket, tehát ha 10gb a max és 1gb van használva akkor 1gb-t foglal fizikailag, de erőforrás ígényes az egész
+> - **RAW:** mindent tárol, 10gb-ra foglaltat 10gbra foglala akkor is ha 1gb van benne, de nem erőforrás ígényes.
+> - **VHD és VHDK:** Hyper-V és azure kedvenc formátuma.
+
+#### Glence architektúra
+Glence api port 9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel kommunikál a `glence registry` komponens ami a glence adatbázis`hoz kapcsolódik. Ebben az adatbázisban van az összes image neve, mérete, felhasználója, stb. Glence api a felt​ltését kezeli, a glence registry a feltö​ltéseket tárolja, pl VM.
+
+![glence struktúra](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/b0ea275a-efab-4185-9c48-6109ceb2da94.jpg)
+
+##### Új virtuális gép a UI-n keresztül:
+1. letöltjük az imaget
+2. `Images` > `Create Image`
+   - megadjuk a nevét
+   - a leírását
+   - feltöltjük az image fájlt.
+   - megadjuk a formátumát *(pl QCOW2)*
+   - megadjuk az architektúráját *(pl: x82/64)*
+   - next: további metainformációk, *pl: hyperviser, pythonverzó, stb*
+3. frissjtjük az oldalt és megjelenik az imagek között az új.
+
+
+
+
