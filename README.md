@@ -162,7 +162,7 @@ Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/
 > - **VHD és VHDK:** Hyper-V és azure kedvenc formátuma.
 
 #### Glence architektúra
-Glence api port 9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel kommunikál a `glence registry` komponens ami a glence adatbázis`hoz kapcsolódik. Ebben az adatbázisban van az összes image neve, mérete, felhasználója, stb. Glence api a felt​ltését kezeli, a glence registry a feltö​ltéseket tárolja, pl VM.
+Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel kommunikál a `glence registry` komponens ami a glence adatbázis`hoz kapcsolódik. Ebben az adatbázisban van az összes image neve, mérete, felhasználója, stb. Glence `api` a feltöltését kezeli, a `glence registry` a feltöltéseket tárolja, pl VM.
 
 ![glence struktúra](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/b0ea275a-efab-4185-9c48-6109ceb2da94.jpg)
 
