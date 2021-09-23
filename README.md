@@ -177,6 +177,60 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
    - next: további metainformációk, *pl: hyperviser, pythonverzó, stb*
 3. frissjtjük az oldalt és megjelenik az imagek között az új.
 
+## EA4
+### Felhő használatával szembeni aggályok:
+> - másoknak adjuk át az adatainkat
+> - nincs meg a kontroll
+> - nem anonim
+> - nem ingyenes
+> - a bevezetéséhez sokmindnene kell változtatni
+> - jobb szeretjük ami a miénk mint amit csak használatra kapunk
+>
+> ![there is no cloud just someone else's computer](https://i.redd.it/f4f4tcoo8wu21.png)
+>
+> - status quo kérdés a saját felhő
+> - rengeteg plusz döntést kell meghozni, ohgy milyen szinten alkalmazzuk a felhőt
+> - komoly pénzügyi kérdések sora
 
+![](https://d3i71xaburhd42.cloudfront.net/f8d43395f5ead76fd1a7823c4c9b169ddf823fcf/4-Table1-1.png)
 
+**data privacy:** az eus gdpr és az amerikai szabályoknak és a lokális szabályoknak is elget kell tegyen 
 
+**monitoring:** Saját felhő monitorozása 
+
+**network bottlenecks:** kicsi a sávszél de sok adatom van amit fel szeretnék tenni, ekkor fizikailag elszállítjuk az adathordozót és átadjuk a felhő szolgáltatónak.
+
+| | |
+| ------------- |:-------------:| 
+| ![felhő1](https://www.computersciencezone.org/wp-content/uploads/2016/01/CloudFlavors.jpg) | ![felhő2](https://www.computersciencezone.org/wp-content/uploads/2015/04/cloud-computing.jpg)|
+
+### Openstack alapok
+> Iaas szinten nézve
+> 
+> ![reminder cloud structure](https://www.researchgate.net/publication/327284357/figure/fig1/AS:664938364280832@1535545068694/Figure-3-NIST-cloud-computing-definition-40.png)
+>
+> ![opnstack parts](https://www.techplayon.com/wp-content/uploads/2018/11/Open-Stack-Components.png)
+> 
+> ![openstack](https://static.packt-cdn.com/products/9781783986965/graphics/B01770_01_03.jpg)
+>
+> 1. Ahhoz, hogy létrehozzunk egy vmet, kell egy img fájl
+> 2. nova megmondja, hogy mekkora mérettel hozzuk létrea VM-et
+> 3. A külső hálózat eléréséhez a neutron segít
+> 4. külső adat hozzárendelése ceilinderrel
+> 5. A keystone authentikál mindent és adja a biztonsági réteget
+> 6. a végfelhasználó egy horizonon keresztül fér hozzá
+>  
+> ![](https://www.researchgate.net/profile/Shilpa-Sonawani/publication/305297793/figure/fig1/AS:394201872257025@1470996458219/Loosely-coupled-architecture-of-OpenStack.png)
+
+#### Keystone
+- token alapú katalógus szolgáltatások http frontenden keresztül
+- részletes beállításokat ad
+- domainek létrehozása
+  - lehet felhasználókat csoportokat projekteket defininálni
+  - egy felhashnáló több projekthez férhet hozzá, de egyszerre csak egyet használhat
+  - külső szerverrel is azonosíthatunk
+  - mindenkinek saját egyedi UUIDja van
+  - lehet user groupokat létrehozni amikre szabályokat alkalmazunk
+  - kvótákat is beálíthatunk egy-egy projekthez
+  - ![](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.58.09%20PM.png)
+  - katalógus/végpont elérést állíthatunk be
