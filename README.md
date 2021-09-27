@@ -234,3 +234,20 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
   - kvótákat is beálíthatunk egy-egy projekthez
   - ![](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.58.09%20PM.png)
   - katalógus/végpont elérést állíthatunk be
+
+
+### GY5 ~ NOVA
+1. a user kér egy api hozzáférést
+2. a nova conductor eltárolja
+3. a nova scheduler létrehozza
+4. a nova compute létrehozza a vm-et és a nova compute kezeli is azt indítás/leállítás/stb
+5. rabbbitmq-server puffereli a kéréseket, és a komopőonenesek elévégzik amikor van rá szabad kapacitásuk.
+
+- vmc proxy 
+- az egyes fizikai gépeken ott van a nova compute,és az kezeli, hogy egy Hyper-V vagy vmware vagy bármi más jól működjön és elfedve legyen a felsőbb réteg elől
+
+![nova copmute macro](https://access.redhat.com/webassets/avalon/d/Red_Hat_OpenStack_Platform-13-Instances_and_Images_Guide-en-US/images/1323ccc0b16e5c84f0964b52b2abe8a9/openstack-libvirt-images.png)![nova compute](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uvhNH1UiYihr0AwbkPjDLThjTjPeiln-jyCTjfiXD0N0W5QAQkOftePkF370BE_K74k&usqp=CAU)
+
+- VM törlése `Instaces`>`select all`>`delete`
+- privátkulcsgenerálás: `ssh-keygen -b 2048 -t rsa -f cloud-key`
+
