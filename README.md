@@ -177,7 +177,7 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
    - next: további metainformációk, *pl: hyperviser, pythonverzó, stb*
 3. frissjtjük az oldalt és megjelenik az imagek között az új.
 
-## EA4
+## EA3
 ### Felhő használatával szembeni aggályok:
 > - másoknak adjuk át az adatainkat
 > - nincs meg a kontroll
@@ -236,7 +236,7 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
   - katalógus/végpont elérést állíthatunk be
 
 
-### GY5 ~ NOVA
+### GY4 ~ NOVA
 1. a user kér egy api hozzáférést
 2. a nova conductor eltárolja
 3. a nova scheduler létrehozza
