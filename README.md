@@ -251,3 +251,27 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
 - VM törlése `Instaces`>`select all`>`delete`
 - privátkulcsgenerálás: `ssh-keygen -b 2048 -t rsa -f cloud-key`
 
+### GY5 ~ NEUTRON
+https://docs.openstack.org/neutron/latest/
+> A hálózati elérést valósítja meg openstacken belül. 
+> 
+> teljes SDN (*software defined network*) hálózatot valósít meg
+
+![projectnetwork-phisicalnetwork](https://docs.openstack.org/neutron/latest/_images/NetworkTypes.png)![intenet-vm connection](https://docs.openstack.org/ocata/install-guide-ubuntu/_images/network2-overview.png)
+
+- **NeutronDatabes** - itt tároljuk a network, stb specifikus információkat
+- **neutronlinuxbradge-agent** - két virtualizált server közötti kommunikációt old meg az `A` virtuális gép és a `B` virtuális gép között az `A` fizikai gép fizikai interfésze és `B` fizikai gép fizikai interfésze közötti kapcsolatot oldja meg.
+  - a **nova compute**tal együtt csinálja az egészet.
+- **neutron-dhcp-agent** - ez osztja ki a VM-eknek az ip címeket.
+- **neutron-l3-agent** - layer3mas szolgáltatásokat virtualizál
+ 
+#### tűzfalazás
+> VM instancen belül egy OS fut amin van egy tűzfal amit konfigurálhatunk, ez VM specifikus szigroításokat tesz lehetővé
+> 
+> Az openstacknek van külön tűzfala is, amivel akár csoportoknak adhatunk szabályokat, stb
+
+1. create network
+   a. ha *shared* akkor több projekkt között is megosztható 
+3. subnet
+4. 
+
