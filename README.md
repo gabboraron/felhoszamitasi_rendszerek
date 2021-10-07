@@ -275,3 +275,35 @@ https://docs.openstack.org/neutron/latest/
 3. subnet
 4. 
 
+## EA5
+### Glace
+![](https://www.oreilly.com/library/view/deploying-openstack/9781449311223/httpatomoreillycomsourceoreillyimages875415.png)
+> **hogy hozhatunk létre imaget:**
+> - openasack disk image builder
+> - haricorp
+> - VMware
+
+> **image formátumok:**
+> - ISO - ISO9660 : hagyom-nyos lemez laapú
+> - VMDK - saját virtuális gép telepíttésekor vMware alatt
+> - VHD-VHDX: hyperV virtualizált formátuma
+> - RAW - nagy formátum, mindent tárol, sok üres helyet is
+
+Architektúra:
+> ![](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/b0ea275a-efab-4185-9c48-6109ceb2da94.jpg)
+
+### Nova
+> különböző hypervisorokkal múködik a nova hyper V, vmware, stb..
+>
+> ![](https://www.oreilly.com/library/view/deploying-openstack/9781449311223/httpatomoreillycomsourceoreillyimages875419.png)
+> mindig a már foglalt sefrverre rakja, ha tudja
+
+### Neutron
+- Horizonon keresztül kezelhetjük
+![](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/9cb27fc5-b634-4e7b-b1b6-efc68476674e.jpeg)
+- neutron server bonyoslítja a kapcsolatot a fizikai és virtuális illetv virtuális-virtuális világ között
+- dhcp: a szokásos
+- l3: routerek
+- bridge: szokásos hálózatis bridge
+
+
