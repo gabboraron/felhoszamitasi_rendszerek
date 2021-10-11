@@ -6,7 +6,7 @@
 Ajánlott irodalom:
 
 - [Matt Dorn: Preparing for the Certified OpenStack Administrator Exam, Packt, 2017](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam)
-  - [coa-aio-newton.ova](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam/blob/master/coa-aio-newton.ova) *fájlt letöltve fut a demo VM `openstack` a login és jelszó weben `admin` a login és jelszó*, belépés `eth0` címmel a böngészőben
+  - [coa-aio-newton.ova](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam/blob/master/coa-aio-newton.ova) *fájlt letöltve fut a demo VM `openstack` a login és jelszó weben `admin` a login és jelszó*, belépés `eth0` címmel a böngészőben, vagy `ip add show eth0`
 - [Anne Gentle, Diane Fleming, Everett Toews, Joe Topjian, Jonathan Proulx, Lorin Hochstein, Tom Fifield: OpenStack Operations Guide. O`Reilly, 2014 (elektronikus jegyzet)](http://www.stilson.net/documentation/OpenStack%20Operations%20Guide.pdf)
 - [Scott Adkins, John Belamaric, Vincent Giersch, Denys Makogon, Jason E. Robinson: OpenStack Cloud Application Development. Wiley, 2016 (elektronikus jegyzet)](https://allitbooks.net/download-file.html)
 
@@ -306,4 +306,27 @@ Architektúra:
 - l3: routerek
 - bridge: szokásos hálózatis bridge
 
+## GY6 - Cinder
+> Digitális köteteket hozhatunk létre amiketblock storage szinte tudunk felmountolni.
+>
+> A compute nodeokban kicsia tároló kapacitás alapvetően, de vannak compute nodeok és strage nodeok is, és ezeket vonjuk össze. Ez az ***e**lastic **b**lock **s**otorage*. Ez jelenik meg *sdc* partició néven. Az I/O műveletek sebesssége kétséges.
+> 
+> ![storage network](http://platform9.com/wp-content/uploads/2015/12/Cinder-1-1-1024x559.png)
+> 
+> Ezzel a megoldással a compute nodeon is tárolunk mega storage nodeon is tárolunk adatot. A compute nodeon csak anynit amennyi épp szükséges
 
+Mindne volumenak van egy azonosítója, mennyi adat tárolható, ki hozta létre, stb metaadatattal, A *cinder-scheduler* dönti el mennyi hely áll még rendelkezésünkre. A *cinder-volume* viszonty minden szerveren futni fog, ez ekrül be mindne VM-hez. A *cinder-backup*ban a vloumeokról készíthetünk backupot.
+
+![](https://accelazh.github.io/images/cinder-architecture.png)
+
+![](https://image.slidesharecdn.com/storagebasedonopenstackmariocho-160220082601/95/storage-based-onopenstackmariocho-23-638.jpg?cb=1455958139)![](https://wiki.openstack.org/w/images/thumb/b/bb/SharedLVMsupport.png/600px-SharedLVMsupport.png)
+
+Cinderen belül tudunk 
+- *volumeokat*: definiálni, ezek az egyes storage gépekhez tartozak, kb mint egy tradicionális harddrive. Ezeket felmountolhatjuk, vagy akár külön VMként is használhatjuk.
+- *snapshot*: a VMről készítünk egy másolatot, technikailag ez is egy volume, de nincs felmountolva!
+- *backup*: egy tömörített formátuma a volumenak.
+
+```shell
+sudo mkfs.ext3 dev/vdb
+sudo mount dev/vdb mnt
+```
