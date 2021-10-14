@@ -330,3 +330,45 @@ Cinderen belül tudunk
 sudo mkfs.ext3 dev/vdb
 sudo mount dev/vdb mnt
 ```
+
+## EA6 Cinder és swift
+Ha a virtuális gépet hackertámadás éri/leáll akkor a fájlok kvázi elvesztek a külső világ számára.
+
+**=>** csináljunk egy perzisztens tárolót block objektúmok tárolására. 
+- a felhasználó megmondja hány kötetre, mekkora tárolási területtre van szüksége a VMhez, és ezt mountoljuk mint egy hagyományos adathordozót a VM-re
+- de így a storage network köti össze ezkeet aminél magas lesz a latency
+
+![storage and compute nodes cinder](http://platform9.com/wp-content/uploads/2015/12/Cinder-1-1-1024x559.png)![openstack block diagram block storage](https://docs.openstack.org/project-deploy-guide/openstack-ansible/ocata/_images/production-storage-cinder.png)
+
+>  cinder kötet szinten kezeli a fájlokt
+
+- cinder-api:ezen át kommunikál a cinderrel a user
+- rabbitmq server: összeköti az apit a schedulerel
+- sinder-scheduler: a storage nodeot kezeli gyakorlatilag
+- cinder- volume: ez manageli a köteteket
+- cinder backup: egy-egy kötetet mint objektumot lehet átteni a swiftb
+
+### Cinder használt technológiái
+- LVM: ezzel hozunk létre logikai köteteket amik már felhasználhatóak lesznek a sinderrel egy NetApp
+- NFS: sriverekkel lehet cindereket létrehozni
+
+### Cinder concepts
+- volume: a raw tárolt block amit a Nován használunk
+- snapshot: adott pillanatban készített másolat a kötet tartalmáról, ez az épp elérrhető állapotban levő kötetekről készíthető
+- backup: archiváltuk, tömörítve, akár másik felhőn vagy fizikailag nálunk  van
+
+### Object storage
+- távioli storage ami ftp szerverekhez ad hozzáférést, vagy dropbox/pinterest/stb oldlak háttere.
+- lehet adott időre megadni a tárolási jogot, és utána töröljük
+
+### Swift
+> minden egy objektum, nincs fájlrendszer
+
+- access control list 
+- static webhost
+- admin
+
+> - object server: a swift clusteren kezelt objektumokat kezeli
+> - auditor: a felső manager, az objektumokat is kezeli, egy sqllite adatbázisba tesi a bejárt állományokat
+> - object expirer: időzített törléekkel foglalkozik
+
