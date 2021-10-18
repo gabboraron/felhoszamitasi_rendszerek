@@ -372,3 +372,29 @@ Ha a virtuális gépet hackertámadás éri/leáll akkor a fájlok kvázi elvesz
 > - auditor: a felső manager, az objektumokat is kezeli, egy sqllite adatbázisba tesi a bejárt állományokat
 > - object expirer: időzített törléekkel foglalkozik
 
+## GY7 Swift vs volume
+- `sudo fdisk -l` 
+- `df -h`
+- `sudo mkfs.ext3 dev/vdb` fájlrendszer létrehozása a disken
+- `sudo fdisk -l` -el látszik
+- `sudo mount dev/vdb mnt/` felmountoljuk a dev/vdb -t az mnt alá
+- `sudo touch mnt/test_file.txt` <- így a tárolt adatok perzisztensen maradnak a felhőben
+
+Az adattárolási megoldások a háttérben egy blockdevicet használnak.Az object store inkább egy újabb, de eléggé feladat specifikus megoldásként használhatóak.
+
+> **Konténerek:** egy mappa amikben több objektumot (fájlokat) tudunk eltárolni.
+- `sat openrc`
+- `cp openrc openrc-oerations`
+- `nano openrc-opreations`
+- `sourc openrc-operations`
+- `swift list`
+- `swift list countainer-dashboard`
+- `swift download contaner-dashboard object-dashboard.txt`
+- `cat object-dashboard.txt`
+- `swift post container-cli`
+- `swift list`
+- `swift stat containers-dashboard`
+- `swift post --read-acl ".r*,.rlistings" container-dashboard`
+- `swift stat containers-dashboard`
+- `swift opnestack api-endpoint`
+- A container publikus api endpointjára hivatkozunk.
