@@ -398,3 +398,36 @@ Az adattárolási megoldások a háttérben egy blockdevicet használnak.Az obje
 - `swift stat containers-dashboard`
 - `swift opnestack api-endpoint`
 - A container publikus api endpointjára hivatkozunk.
+
+## EA7 - AWS, EC2, S3
+https://azure.microsoft.com/en-us/free/students/
+
+- AAWS, EC2 - számítási szolgáltaáts 
+- S3 - tárolási
+
+IAAs szint
+
+![https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png](https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png)
+
+https://cloud.netapp.com/blog/understanding-aws-high-availability-compute-sql-and-storage
+![](https://cloud.netapp.com/hs-fs/hubfs/QWERTYUIUIOPOP.png?width=600&name=QWERTYUIUIOPOP.png)
+
+Azért kell nagy ram a vmekhez mert a DB server ramban tartja a DB-t, hogy gyorsabb legyen a lekérdezés.
+
+### Amaazon elastic compute cloud (EC2)
+![EC2 lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/ami_lifecycle.png)
+
+1. kiválasztjuk mi az os
+2. instence type
+3. instence konfigurálás
+   -btiz4tési modellek 
+4. tárhyel hozzáadása
+5. portok megadása
+6. security group
+7. elasztikus IP megadása
+
+https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf
+
+
+
+
