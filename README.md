@@ -428,6 +428,20 @@ Azért kell nagy ram a vmekhez mert a DB server ramban tartja a DB-t, hogy gyors
 
 https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf
 
+## GY8 - Heat orchestration service
+> **felhőfüggő megoldás:** csinálunk egy leíró fájlt *(infrastructure as a code)* és azt adjuk oda az értlemezőnek vm létrehozásához, így automatizáljuk a folyamatot
+>
+> **felhőfüggetlen megoldás:** külső eszközökkel hozzuk létre a fájlt, amik sok esetben más szolgltatásokat is adnak.
 
+- `heat api`
+- `heat api cfn` 
+- `heat engine`
 
+![heat orchestrator](https://cloudinfrastack.com/articles_img/openstack_02.jpg)
+
+`.yaml` fájlokkal definiljuk: megadjuk a `paraméter`eket, `servereket`, `volumeattach`, `output`:
+- **`paraméter`**: *string*, *description* itt változókat hozunk létre
+- **`resources`**: *string*; *type* - `OS::Nova::Server` - ezzel egy openstack novával létrehozunk egy szerver VM-et; *properties*: név, image fájl, network amihez csatlakozik; *volumeattach1*: megadjuk, hogy melyik volumeot csatoljuk fel a VMhez
+
+> nem feladat az, hogy miképp fut le a az erőforrás, a konfig menedzsmentnek meg nem feladat az erforrás létrehozása, ilylen tool pl a cloud init
 
