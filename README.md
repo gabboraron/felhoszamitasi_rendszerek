@@ -445,3 +445,13 @@ https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf
 
 > nem feladat az, hogy miképp fut le a az erőforrás, a konfig menedzsmentnek meg nem feladat az erforrás létrehozása, ilylen tool pl a cloud init
 
+## EA8
+## EA9
+## GY10 - Docker
+![](https://docs.docker.com/engine/images/architecture.svg)![](https://images.contentstack.io/v3/assets/blt300387d93dabf50e/bltb6200bc085503718/5e1f209a63d1b6503160c6d5/containers-vs-virtual-machines.jpg)![](https://docs.docker.com/storage/images/types-of-mounts-volume.png)
+
+
+
+
+
+## EA10
