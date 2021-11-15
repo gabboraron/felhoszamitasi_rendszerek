@@ -446,12 +446,52 @@ https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf
 > nem feladat az, hogy miképp fut le a az erőforrás, a konfig menedzsmentnek meg nem feladat az erforrás létrehozása, ilylen tool pl a cloud init
 
 ## EA8
+//
+
 ## EA9
-## GY10 - Docker
+//
+
+## GY10 - Docker I
 ![](https://docs.docker.com/engine/images/architecture.svg)![](https://images.contentstack.io/v3/assets/blt300387d93dabf50e/bltb6200bc085503718/5e1f209a63d1b6503160c6d5/containers-vs-virtual-machines.jpg)![](https://docs.docker.com/storage/images/types-of-mounts-volume.png)
 
+> ***Ha a konténer futó progrmja bezárul akkor a konténer is bezárul!***
 
+## EA10 ~ konzultáció
+¯\\_( ͡❛ ͜ʖ ͡❛)_/¯
 
+## GY11 - Docker II
+> - `docker imager --help`
+> - buildelés: `docker image build [path]`
+> - `-d` detached
+> - `--rm` remove
+> - ``
+> 
+> Nem törölhetünk docker imaget amíg konténer hivatkozik rá!
+> 
+> **takarítás:**
+> 1. töröljünk kontéreket: `docker container prune`
+> 2. töröljünk imgeket
+> 
+> `docker run -it ubuntu20.04 bash` letöltjük az ubuntu 20.04 imaget és elindítjuk a `bash`-t
+> 
+> **docker image létrehozása:**
+> 
+> javasolt a hivatalos alap imagekből kiindulni!
+> 
+> ```python
+> FROM python3.8 slim
+> Workdir /app
+> ADD . / app
+> RUN pip install flask redis
+> EXPOSE 80
+> CMD ["python", "app.py"]
+> ```
+> - mentés `ctrl`+`o`
+> - `dcker run -d -p 8080:80 --name app python-app:latest`
+> - `docker ps`
+> - `curl localhost:8080`
+> - `docker stop app`
+> - `docker rm app`
+> - `ls -alh`
+> - `docker images`
 
-
-## EA10
