@@ -1,1 +1,0 @@
-https://stackoverflow.com/a/19736494 alapján
