@@ -1,3 +1,0 @@
-változó átadása `php`ból `python3`ba
-
-https://www.sitepoint.com/community/t/calling-python-script-from-php-how-to-include-variables/36926/2 és még sok más hülye leírás alapján...
