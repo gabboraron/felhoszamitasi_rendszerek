@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Chartjs TESZt</title>
+</head>
+<body>
+
+<div>
+  <canvas id="myChart" style="max-height: 50vh;"></canvas>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript">
+
+
+const data = {
+  labels: [],
+  datasets: [{
+    label: 'My First Dataset',
+    data: [],
+    backgroundColor: [
+      'rgb(71, 155, 43)',
+      'rgb(205, 205, 255)',
+      'rgb(192, 39, 45)',
+      'rgb(97, 101, 78)',
+      'rgb(23, 121, 186)',
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(56, 182, 255)'
+
+    ],
+    hoverOffset: 4
+  }]
+};
+ 
+
+ 
+
+const config = {
+  type: 'pie',
+  data: data,
+};
+
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+
+//ezt kell meghívni, hogy hozzáadjunk adatot
+//addData(myChart, 'test2', 10);
+
+</script>
+
+
+</body>
+</html>
