@@ -5,9 +5,18 @@
     <meta charset="UTF-8">
     <script type="text/javascript" src="autoupdater.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
 </head>
-<div id="liveData">
-    <p>Loading Data...</p>
-</div>
+
+<body>
+
+    <button onclick="ExportToExcel('xlsx', 'covidnewsHU', 'Magyar Koronavírus Info', 'Találatok a Magyar Koronavírus Inforól')">Excelbe exportálás</button>
+    <div id="liveData">
+        <p>Loading Data...</p>
+    </div>
+
+    <script type="text/javascript" src="printInTable.js"></script>
+    <script type="text/javascript" src="exportToExcel.js"></script>
+
 </body>
 </html>

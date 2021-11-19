@@ -4,6 +4,7 @@ import os.path, time
 import datetime
 import xml.etree.ElementTree as ET
 import sys
+import json 
 
 today = datetime.datetime.today()
 modified_date = datetime.datetime.fromtimestamp(os.path.getmtime('academictorrents_database.xml'))
@@ -20,7 +21,12 @@ root = tree.getroot()
 
 
 searchterm = sys.argv[1]
-out = {"data":[], "status":[200], "answers":[0]}
+#out = {"data":[], "status":[200], "answers":[0]}
+out = []
+
+error = 0
+status = 0
+nrOfResults = 0
 
 
 for channel in root:
@@ -34,8 +40,11 @@ for channel in root:
 				#print(child.text.find(searchterm))
 				#print(item.t)
 				#torrents = {}
-				out["answers"][0] = out["answers"][0] +1	
+				nrOfResults = nrOfResults +1	
 				match = 1
 		if match == 1:
-			out["data"].append(tmp)
-print(out)
+			out.append(tmp)
+out.append(status)
+out.append(nrOfResults)
+
+print(json.dumps(out))

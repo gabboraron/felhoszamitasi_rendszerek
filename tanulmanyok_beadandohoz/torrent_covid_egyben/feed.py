@@ -43,4 +43,5 @@ else:
 	out["status"] = 404
 	#print("404")
 
+#print(json.dumps(out))
 print (out)

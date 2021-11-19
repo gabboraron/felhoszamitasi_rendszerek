@@ -8,13 +8,14 @@
 
 	$test = 'tumor';
 	//if ($_GET['times'] == 0) {
-		$command = escapeshellcmd('python3 academic_search.py '. /*$_GET['subject']*/$test);
-		$output = json_encode(shell_exec($command));
+		$command = escapeshellcmd('python3 academic_search.py tumor');//. /*$_GET['subject']*/$test);
+		$output = shell_exec($command);
+		//echo $command;
+		//echo "<hr>";
+		header('Content-type: application/json');
 		echo $output;
 	//}
-	
-
-
+		
 
 
 ?>
