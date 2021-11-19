@@ -4,14 +4,13 @@ import json
 import html
 import sys
 
+requestpost = requests.post('https://awxyhe.web.elte.hu/koronavirus/updatesqldb.php')
 requestpost = requests.post('https://awxyhe.web.elte.hu/koronavirus/fetchallnews.php')
 response_data = requestpost.json()
 
-status = 0
 searchterm = sys.argv[1]
 
 out = []
-
 
 error = 0
 status = 0
