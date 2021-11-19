@@ -43,7 +43,10 @@ for channel in root:
 				nrOfResults = nrOfResults +1	
 				match = 1
 		if match == 1:
+			tmp.append(tmp[len(tmp)-1].replace('download', 'details'))
 			out.append(tmp)
+
+status = 200
 out.append(status)
 out.append(nrOfResults)
 
