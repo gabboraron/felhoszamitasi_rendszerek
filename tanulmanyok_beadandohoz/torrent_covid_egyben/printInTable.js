@@ -20,7 +20,7 @@ function printInTable(heading, tableData) {
     for (var i = 0; i < tableData.length-2; i++) {
         var row = document.createElement("TR");
         
-        for (var j = 0; j < tableData[j].length; j++) {
+        for (var j = 0; j < tableData[i].length; j++) {
             var data = document.createElement("TD");
             data.innerHTML = tableData[i][j];
             row.appendChild(data);
