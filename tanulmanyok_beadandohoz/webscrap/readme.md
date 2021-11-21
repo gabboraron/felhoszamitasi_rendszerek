@@ -1,7 +1,6 @@
 # webscrap
 
-Based on [ freeCodeCamp.org
- - Web Scraping with Python - Beautiful Soup Crash Course](https://www.youtube.com/watch?v=XVv6mJpFOb0)
+Based on [ freeCodeCamp.org - Web Scraping with Python - Beautiful Soup Crash Course](https://www.youtube.com/watch?v=XVv6mJpFOb0)
 
 
 ```python
