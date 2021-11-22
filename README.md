@@ -402,19 +402,19 @@ Az adattárolási megoldások a háttérben egy blockdevicet használnak.Az obje
 ## EA7 - AWS, EC2, S3
 https://azure.microsoft.com/en-us/free/students/
 
-- AAWS, EC2 - számítási szolgáltaáts 
+- AWS, EC2 - számítási szolgáltatás 
 - S3 - tárolási
 
-IAAs szint
-
-![https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png](https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png)
+**IaaS szint**
+|         |            | 
+| ------------- |:-------------:| 
+| ![https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png](https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png)      | ![](https://cloud.netapp.com/hs-fs/hubfs/QWERTYUIUIOPOP.png?width=600&name=QWERTYUIUIOPOP.png) |
 
 https://cloud.netapp.com/blog/understanding-aws-high-availability-compute-sql-and-storage
-![](https://cloud.netapp.com/hs-fs/hubfs/QWERTYUIUIOPOP.png?width=600&name=QWERTYUIUIOPOP.png)
 
 Azért kell nagy ram a vmekhez mert a DB server ramban tartja a DB-t, hogy gyorsabb legyen a lekérdezés.
 
-### Amaazon elastic compute cloud (EC2)
+### Amazon elastic compute cloud (EC2)
 ![EC2 lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/ami_lifecycle.png)
 
 1. kiválasztjuk mi az os
@@ -445,14 +445,132 @@ https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf
 
 > nem feladat az, hogy miképp fut le a az erőforrás, a konfig menedzsmentnek meg nem feladat az erforrás létrehozása, ilylen tool pl a cloud init
 
-## EA8
-//
+## EA8 - high availability - load balancing - autoscaling patterns (AWS)
+> ajánlott irodalom: [Implementing Cloud Design Patterns for AWS](https://www.oreilly.com/library/view/implementing-cloud-design/9781782177340/)
 
-## EA9
-//
+Mi an agy rendelkezésre állás:
+- **rendelkezésre állás:** a rendszer reszponzivitása *(hogy kapjunk választ a kérdésekre)* nagyon fontos => ***néma gyereknek anyja se érti a szavát***
+    - **monolitikus rendszer**eken nehezen megvalósítható
+    - **multiserver - multi database rendszer** megnöveli a rendszer rendelkezésre állását
+![AWS implementation - load balancer -ec2 instances](https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2019/10/06/illustration-2.png)
+
+### Multiserver 
+>#### 1. EC2 instance
+> 1. végy egy linux servert
+> 2. SSH-n konfiguráljuk
+>    - *ehhez saját észrevételek:*
+>    - *hozz létre virtuálsi hálózatot (VPC) [e szerint a leírás szerint](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateVPC.html#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2), persze válaszd ki előbb melyik opció kell neked ebből mert itt sok féle van, van dbhez is meg ec2höz is*
+>     - *én nem csak inboundnak hanem outnak is megcsinaáltam mindent mert inbundként nem ment, ileltve mindnehova `0.0.0.0`-t adtam meg, mert úgy működött, ha saját IPt használtam akkor nem, de valszeg más volt az oka, szóval működnie kell saját ipvel is az SSH-s résznél* 
+>     - *az ec2-t hozd létre [e szerint](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html)*
+>     - *amikor beshzol PUTTYal akkor azt [e szerint tudod](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) és itt usernek nem azt az `i-akármi`t adod ahogy írja hanem [ebből a listából](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY) kiválasztod ami a te VM-ed és azzal be tudsz lépni. a többi lépést kövesd a leírás szerint és akkor oké.*
+>
+> #### 2. ELB létrehozása - elastic low balance server *(terhelés elosztó)*
+> 1. megadjuk a portot 
+> 2. megadhatunk helth chakcet, hogy ellenőrizze a kapcsoaltot az instanceokhoz, itt trasholdot is megadhatunk a betöltésekhez
+> 3. megadjuk az ec2 instanceot az ELB alá.
+> 4. status chack - ellenőrizzük az instanceok állapotát (fut/nem fut stb)
+>
+> #### 3. clone EC2
+> klónozzuk akár virtualboxnál
+> 
+>#### 4. Új instance hozzáadása az ELB-hez
+> hozzáadunk akárhány újat.
+> 
+>#### 5. Tesztelünk
+> tesztelhetünk az AWS consolon, vagy 
+>
+### Multidata center pattern
+> kihejezhetjük több zónába a rendszert í]y karbantartáskor sem áll le.
+
+### Auto scaleing pattern
+![aws autoscaling pattern](https://static.packt-cdn.com/products/9781782177340/graphics/7340OT_02_08.jpg)
+> https://subscription.packtpub.com/book/web-development/9781782177340/2/ch02lvl1sec17/scale-out-pattern
+>
+> Egy `Cloud watch` ha túlterhelődik az instance szól az `Autoscaling group`nak ami létrehoz egy új isntanceot az ELB-n
+> 
+> **1. lounch config**
+> **2. cloudWatch beállítása**
+>    ```yaml
+>    #!/bin/bash
+>    yum install -y httpd stress
+>    service iptables stop #Turn off firewall because it is enabled on ELB
+>    echo welcome > /var/www/html/index.html #Makes a valid ELB helth check service httpd start
+>    ```
+>    
+> **3. konfiguráljuk a lounch configot, pl az alábbi scripttel:**
+>    ```yaml
+>    #!/bin/bash
+>    yum install -y httpd stress
+>    service iptables stop
+>    echo welcome > /var/www/html/index.html
+>    service httpd start
+>    ```
+>    a `request stop instances` beállításával licitálunk a kihasználatlan rendszerkapacitásért.Olcsóbb példányokat kapunk, ha nyerünk a liciten, de a legtöbbet ajánló kapja meg.
+>    
+> **4. autoskálázási csoport létrehozása**
+>    - megadhatjuk, hogy hány isntanceon induljon a csoport
+>    - adhatunk alhálózatot
+>    - load balancert állítunk be
+>    - helth check típusát is mgeadhatjuk
+>    
+> **5. sklázási irányleveket adhatunk meg**
+>    - megadhatjuk hány példány között skálázódik 
+>    - risasztásokat hozhatunk létre amikt példányokhoz rendelhetjük, *pl: ha 5 percen keresztül a memóra használat x fölé emelkedik szól*  
+>    - skálázási csoportokat is megadhatunk amik a riasztásokra váalaszolva pl kikapcsolják az adott túlterhelt VM-et
+>    - *60s szabály*
+
+## EA9 - Microsoft Azure
+Ajánlott irodalom:
+- [Barrie Sosinsky - cloud computing bible](https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf)
+- [Windows Azure lépésről lépésre](https://docplayer.hu/730732-Windows-azure-lepesrol-lepesre.html)
+
+> platform szolgltatóként az egyik legerősebb
+> 
+> ![azure services](https://mountainss.files.wordpress.com/2016/06/azure-services.jpg)
+> 
+> Platform as a Service model: *valahol a felhőben úgy futtatunk szolgáltatásokat, hogy a felhő egyéb szolgáltatsáokt integrál alá, pl SQL adaatbázis, ahol nem látjuk milyen VM fut alatta, csak azt, hogy tudunk lekérdezést indítani.*
+
+### Számítási szolgáltatások - IaaS
+> - A Microsoft ellsődlegesen a saját virtualizációs technikáját használja, ez a HyperV.
+> - load balancer engedi rá a felhasználót a VM-ekre.
+> 
+> #### Azure websites
+> *IIS (Internet Information Server)* kommunikál a tárolóval.
+> ![](https://mountainss.files.wordpress.com/2014/09/azure.jpg)
+> 
+
+### Adatkezelés
+> *felhasznál* szempontjából nézve:
+> 1. load balancer/web role instance
+> 2. quee
+> 3. worker roles
+> 4. database
+> 
+> #### Azure SQL database
+> - [docs.microsoft.com](https://docs.microsoft.com/en-us/azure/azure-sql/azure-sql-iaas-vs-paas-what-is-overview)
+> 
+> ![](https://docs.microsoft.com/en-us/azure/azure-sql/media/azure-sql-iaas-vs-paas-what-is-overview/sqliaas_sql_server_cloud_continuum.png)
+> 
+> A háttérben replikák készülnek az adatbázisról, azaz mi, felhasználóként egy adatbázist látunk, de gyakorlatilag több különböző helyen vannak tárolva.
+> 
+> **DTU**: Data Transaction Unit, egy tranzakció objektuma, benne az írási/olvasási műveletekkel. Az adatbázis "jóságának" mértékegyége, hogy hány műveletet tud végrehajtani teljes terhelés alatt, azaz hány DTU-ra képes
+> 
+> **eDTU**: elasztikus DTU, azaz egy adatbázisom van, de időnként nagyobb terhelést kap mint máskor, ekkor egy poolt hozunk létre az adatbázisainkból és ezekre hasnálunk különböző standardokat:
+> - basic: 0-5 eDTU
+> - standard: 100-1200 eDTU
+> - premium: 125-1500 eDTU
+
+### Networking
+### IT szolgáltatások
+> ![services](![](https://i.pinimg.com/736x/15/6c/79/156c79e7f1a08575169d5b316940ca94.jpg))
+### CDN
+### [HADOOP](https://hadoop.apache.org/) - Bigdatához
+> ![nist model of cloud computing](https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png)
 
 ## GY10 - Docker I
-![](https://docs.docker.com/engine/images/architecture.svg)![](https://images.contentstack.io/v3/assets/blt300387d93dabf50e/bltb6200bc085503718/5e1f209a63d1b6503160c6d5/containers-vs-virtual-machines.jpg)![](https://docs.docker.com/storage/images/types-of-mounts-volume.png)
+|         |            |   |
+| ------------- |:-------------:| -----:|
+| ![](https://docs.docker.com/engine/images/architecture.svg)| ![](https://images.contentstack.io/v3/assets/blt300387d93dabf50e/bltb6200bc085503718/5e1f209a63d1b6503160c6d5/containers-vs-virtual-machines.jpg) | ![](https://docs.docker.com/storage/images/types-of-mounts-volume.png) |
 
 > ***Ha a konténer futó progrmja bezárul akkor a konténer is bezárul!***
 
