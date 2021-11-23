@@ -3,8 +3,7 @@
 > ***Államvizsgás tárgy!***
 >
 
-Ajánlott irodalom:
-
+**Ajánlott irodalom:**
 - [Matt Dorn: Preparing for the Certified OpenStack Administrator Exam, Packt, 2017](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam)
   - [coa-aio-newton.ova](https://github.com/PacktPublishing/Preparing-for-the-Certified-OpenStack-Administrator-Exam/blob/master/coa-aio-newton.ova) *fájlt letöltve fut a demo VM `openstack` a login és jelszó weben `admin` a login és jelszó*, belépés `eth0` címmel a böngészőben, vagy `ip add show eth0`
 - [Anne Gentle, Diane Fleming, Everett Toews, Joe Topjian, Jonathan Proulx, Lorin Hochstein, Tom Fifield: OpenStack Operations Guide. O`Reilly, 2014 (elektronikus jegyzet)](http://www.stilson.net/documentation/OpenStack%20Operations%20Guide.pdf)
@@ -48,25 +47,23 @@ A felhő egy modell, on-demand alapú, konfigurálható számítási kapacitáss
 - kiskálázás (horizontális skálázás): mikor ugyanolyan technológiából használok többet.
 
 ### szolgáltatási modellek:
-- IaaS (Infrastructure as a Service) pl a virtualizálás maga, VMware
-- PaaS (platform as a Service) Cuda, itt a szolgáltatás maga érhető el
-- SaaS (Software as a Service) szoftvevrkezelő tudásra van szükség, pl GDrive, Dropbox, Netflix
+- **IaaS** *(Infrastructure as a Service)* pl a virtualizálás maga, VMware
+- **PaaS** *(Platform as a Service)* Cuda, itt a szolgáltatás maga érhető el
+- **SaaS** *(Software as a Service)* szoftvevrkezelő tudásra van szükség, pl GDrive, Dropbox, Netflix
 
 ![pizza analógia](https://miro.medium.com/max/1400/1*peN3l27025YUoY0FEqllVA.jpeg)
 
-- on-promise rendszereknek vannak előnyei, olcsóbb elhet, ha sokat és nagy hozzáértéssel használjuk (pl ha van jó csapatunk aki megcsinálja)
+- on-promise rendszereknek vannak előnyei, olcsóbb lehet, ha sokat és nagy hozzáértéssel használjuk (pl ha van jó csapatunk aki megcsinálja)
 - ha viszont nekem az időm drágább akkor SaaS jobb
 
-https://www.optimizely.com/insights/blog/pizza-as-a-service/
+[Pizza as a Service analogy: On Prem, IaaS, PaaS & SaaS](https://www.optimizely.com/insights/blog/pizza-as-a-service/)
 
 ## GY2
 ### Keystone
-
-A keystoneban lévő `user`hez lehet jogosultságokat rendelni, tehát az abba való authentikációt nem az kezeli.
-
-Az openstacken létrehozott domainek között nincs átláthatóság
-A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.
-
+> A keystoneban lévő `user`hez lehet jogosultságokat rendelni, tehát az abba való authentikációt nem az kezeli.
+>
+> Az openstacken létrehozott domainek között nincs átláthatóság
+> A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.
 
 | | |
 | ------------- |:-------------:| 
@@ -74,30 +71,30 @@ A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforr�
 | A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.| ![domain-projekt kapcsolat](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.04.26%20PM.png)|
 | Az openstacken létrehozott domainek között nincs átláthatóság | ![projekt alfelosztás](https://s3.amazonaws.com/madorn.com/images/ss.png)| |
 
-A felhasználókhoz szerepeket köthetünk.
-
-beSSHzunk Puttyal `openstack@ip`.
-
-
-1 vCPU mellé 2gb RAM
-egy gép min 2 vCPU - 4gb RAM
-
-hard limit az, hogy gey copmute serveren milyen gépet hozunk létre!
+> A felhasználókhoz szerepeket köthetünk.
+> 
+> beSSHzunk Puttyal `openstack@ip`.
+>
+> - 1 vCPU mellé 2gb RAM
+> - egy gép min 2 vCPU - 4gb RAM
+>
+> **hard limit** az, hogy egy copmute serveren milyen gépet hozunk létre!
 
 #### konfiguráció webes guin át
-> a gui csak az adott ipn található openstackel tud kommunikálni
-`Project` > `instances` itt látszanak a gépek
-`Project` > `Ovierview` itt a megadott hardware megk​tések látszanak
-`Identity` > `Projects` létrehozott projektek és azokhoz tartozó allokált hardware k​​vetelmények
+> a gui csak az adott `ip`n található openstackel tud kommunikálni
+> 
+> - `Project` > `instances` itt látszanak a gépek
+> - `Project` > `Ovierview` itt a megadott hardware megk​tések látszanak
+> - `Identity` > `Projects` létrehozott projektek és azokhoz tartozó allokált hardware k​​vetelmények
 
 #### konfiguráció parancssoron át
 > a parancssori kliens bármely openstacket tudja kezelni
-
-`openstack` parancs, jelszó `openstack`
-- `source`
-- `openrc`
-
-mindig copy az eredeti settings fájlt és azt módosítsuk!
+>
+> - `openstack` parancs, jelszó `openstack`
+> - `source`
+> - `openrc`
+> 
+> *mindig `copy` az eredeti settings fájlt és azt módosítsuk!*
 
 # EA2
 ![cloud reference model i](https://www.researchgate.net/profile/Abbas_Strommen-Bakhtiar/publication/278657825/figure/fig7/AS:790968647299072@1565593029417/IaaS-vs-PaaS-vs-SaaS-Source-Kates-Comments-2010-4.png)
@@ -109,7 +106,7 @@ mindig copy az eredeti settings fájlt és azt módosítsuk!
 
 > ### Közösségi felhő
 > 
-> Szintén csak a szervezetférhet hozzá, de szintén nem feltétlen van helyileg a szervezetnél, de olyannak van felkonfigurálva ami pont a szervezet ígényeit elégíti ki.
+> Szintén csak a szervezet férhet hozzá, de szintén nem feltétlen van helyileg a szervezetnél, de olyannak van felkonfigurálva ami pont a szervezet ígényeit elégíti ki.
 
 
 > ### Publikus felhő
@@ -123,48 +120,50 @@ mindig copy az eredeti settings fájlt és azt módosítsuk!
 >
 > ![hybrid cloud](https://nttdata-solutions.com/wp-content/usermedia/blog-what-is-a-hybrid-cloud-infographic.png)
 
-![felhők használatának tipikus mintái](https://labs.eleks.com/wp-content/uploads/2012/12/cc-patterns.png)
 
-> ### Predictable bursting
-> Egy híroldal terheltsége más órákban nő meg mint egy könyvelő szerveré, tehát a felhő mögötte az képes egyneletesen "leterhelődni".
+
+> ### Felhők terhelése
+> | _**Predictable bursting:**_ Egy híroldal terheltsége más órákban nő meg mint egy könyvelő szerveré, tehát a felhő mögötte az képes egyneletesen *"leterhelődni"*. | ![felhők használatának tipikus mintái](https://labs.eleks.com/wp-content/uploads/2012/12/cc-patterns.png) |
+> | ------------- |:-------------:| 
 
 ## Felhő felhasználás előnyei
-- alacsony költség, merta szolgáltatóknak megvan a technológiája hozzá, sok felhasználóval
-- Könnyű felhasználhatóság: hamar elérhetőek licenszes termékek akár
-- Guality of service: 99,999% hogy egy s3as trolón nincs adatvesztés.
-- megbízhatóság
-- kiszervezett IT menedzsment:it szzolgáltatások kiszervezése olcsóbb mint saját it állományt fenntartani.
-- simplified mantenece and upgrade: könnyen és gyorsan elérhetőek a frissítések.
-- nagyon olcsón lehet hozzákezdeni
+- **alacsony költség**, mert a szolgáltatóknak megvan a technológiája hozzá, sok felhasználóval
+- **Könnyű felhasználhatóság:** hamar elérhetőek licenszes termékek akár
+- **Quality of service:** 99,999% hogy egy S3-as tárolón nincs adatvesztés.
+- **megbízhatóság**
+- **kiszervezett IT menedzsment**: it szzolgáltatások kiszervezése olcsóbb mint saját it állományt fenntartani.
+- **simplified maintenance and upgrade**: könnyen és gyorsan elérhetőek a frissítések.
+- **nagyon olcsó**n lehet hozzákezdeni
 
 ## Felhőt szolgáltatni miért jó
-- profit
-- optimalizálás: egyébként kihasználatlanul álló gépeket megnyitunk publikusnak
-- stratégia: fenchise védelem, windows  azure
-- kiszervezés: IBM-hez kiszervezi a számítást, könyvelést
-- brand szempontjából terület megjelölés: Google app engine
-- platform: kapcsolat a vevőkkel: salesforce.com force.com  
+- **profit**
+- **optimalizálás**: egyébként kihasználatlanul álló gépeket megnyitunk publikusnak
+- **stratégia**: franchise védelem, windows  azure
+- **kiszervezés**: IBM-hez kiszervezi a számítást, könyvelést
+- **brand szempontjából terület megjelölés**: Google app engine
+- **platform**: Ha egyébként is szükség lenne hasonló eszközre
+- **kapcsolat a vevőkkel**: salesforce.com force.com  
 
 ## GY3
 ### Glence
-Amikor kérünk egy gépet a felhőben akkor annak általában nincs operációs rendszere vagy ha van nem olyan mint szeretnénk, ezért érdemes olyant telepíteni amit szeetnénk telepíteni.
+Amikor kérünk egy gépet a felhőben akkor annak általában nincs operációs rendszere vagy ha van nem olyan mint szeretnénk, ezért érdemes olyant telepíteni amit szeretnénk telepíteni.
 Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/focal/release/) innen a `kvm` szót tartalmazót ha telepítjük, mert ha virtualboxosat telepítünk akkor a `.ova` fájl kell. [Debian](http://cloud.debian.org/images/cloud/)ra is létezik felhős image.
 
 > #### Hogy tudunk a felhasználónak előre elkészítnei egy ubuntut pl dockerrel:
-> 1. leteöltjük a vmet, azt futtatjuk, majd azon belül tlepítjük a dockert és az így keletkezett vm-et leállítjuk és feltöltjük.
+> 1. letöltjük a VMet, azt futtatjuk, majd azon belül telepítjük a dockert és az így keletkezett VM-et leállítjuk és feltöltjük.
 > 2. [openstack disk image builder](https://docs.openstack.org/diskimage-builder/latest/) projektét használva, de csak openstacken működik, szóval AWSre pl nem alkalmas.
 > 3. [hashicorp packer](https://www.packer.io/) ugyanaz mint az openstackes csak nem felhő függő, használható bármilyen felhőhöz. Azért előnyös mert könnyen lehet frissítéseket bepipeolni a felhőbe a különböző imagek frissítéséhez pl.
 > 4. [oracle virtualbox](https://www.virtualbox.org/)
 
 > #### image formátumok:
->  - **QCOW2:** tömöríti az imaget, és növeli addig amíg eléri amximum beállított értéket, tehát ha 10gb a max és 1gb van használva akkor 1gb-t foglal fizikailag, de erőforrás ígényes az egész
-> - **RAW:** mindent tárol, 10gb-ra foglaltat 10gbra foglala akkor is ha 1gb van benne, de nem erőforrás ígényes.
-> - **VHD és VHDK:** Hyper-V és azure kedvenc formátuma.
+>  - **QCOW2:** tömöríti az imaget, és növeli addig amíg eléri amximum beállított értéket, tehát ha 10Gb a max és 1Gb van használva akkor 1Gb-t foglal fizikailag, de erőforrás ígényes az egész
+> - **RAW:** mindent tárol, 10Gb-ra foglaltat 10Gb-ra foglal akkor is ha 1Gb van benne, de nem erőforrás ígényes.
+> - **VHD és VHDK:** Hyper-V és Azure kedvenc formátuma.
 
-#### Glence architektúra
-Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel kommunikál a `glence registry` komponens ami a `glence adatbázis`hoz kapcsolódik. Ebben az adatbázisban van az összes image neve, mérete, felhasználója, stb. Glence `api` a feltöltését kezeli, a `glence registry` a feltöltéseket tárolja, pl VM.
-
-![glence struktúra](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/b0ea275a-efab-4185-9c48-6109ceb2da94.jpg)
+#### Glance architektúra
+> Glance api port `9292 TCP`-n hallgatózik. Minden usernek van egy adatbázisa, amivel kommunikál a `glence registry` komponens ami a `glence adatbázis`hoz kapcsolódik. Ebben az adatbázisban van az összes image neve, mérete, felhasználója, stb. Glance `api` a feltöltését kezeli, a `glence registry` a feltöltéseket tárolja, pl VM.
+>
+> ![glance struktúra](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/b0ea275a-efab-4185-9c48-6109ceb2da94.jpg)
 
 ##### Új virtuális gép a UI-n keresztül:
 1. letöltjük az imaget
@@ -174,8 +173,8 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
    - feltöltjük az image fájlt.
    - megadjuk a formátumát *(pl QCOW2)*
    - megadjuk az architektúráját *(pl: x82/64)*
-   - next: további metainformációk, *pl: hyperviser, pythonverzó, stb*
-3. frissjtjük az oldalt és megjelenik az imagek között az új.
+   - next: további metainformációk, *pl: hypervisor, python verzó, stb*
+3. frissítjük az oldalt és megjelenik az imagek között az új.
 
 ## EA3
 ### Felhő használatával szembeni aggályok:
@@ -183,18 +182,18 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
 > - nincs meg a kontroll
 > - nem anonim
 > - nem ingyenes
-> - a bevezetéséhez sokmindnene kell változtatni
+> - a bevezetéséhez sokmindenen kell változtatni
 > - jobb szeretjük ami a miénk mint amit csak használatra kapunk
 >
 > ![there is no cloud just someone else's computer](https://i.redd.it/f4f4tcoo8wu21.png)
 >
 > - status quo kérdés a saját felhő
-> - rengeteg plusz döntést kell meghozni, ohgy milyen szinten alkalmazzuk a felhőt
+> - rengeteg plusz döntést kell meghozni, hogy milyen szinten alkalmazzuk a felhőt
 > - komoly pénzügyi kérdések sora
 
 ![](https://d3i71xaburhd42.cloudfront.net/f8d43395f5ead76fd1a7823c4c9b169ddf823fcf/4-Table1-1.png)
 
-**data privacy:** az eus gdpr és az amerikai szabályoknak és a lokális szabályoknak is elget kell tegyen 
+**data privacy:** az eus GDPR és az amerikai szabályoknak és a lokális szabályoknak is eleget kell tegyen 
 
 **monitoring:** Saját felhő monitorozása 
 
@@ -205,55 +204,54 @@ Glence api port `9292 TCP`-n hallgat. Minden usernek van egy adatbázisa, amivel
 | ![felhő1](https://www.computersciencezone.org/wp-content/uploads/2016/01/CloudFlavors.jpg) | ![felhő2](https://www.computersciencezone.org/wp-content/uploads/2015/04/cloud-computing.jpg)|
 
 ### Openstack alapok
-> Iaas szinten nézve
+> IaaS szinten nézve
 > 
 > ![reminder cloud structure](https://www.researchgate.net/publication/327284357/figure/fig1/AS:664938364280832@1535545068694/Figure-3-NIST-cloud-computing-definition-40.png)
->
-> ![opnstack parts](https://www.techplayon.com/wp-content/uploads/2018/11/Open-Stack-Components.png)
 > 
-> ![openstack](https://static.packt-cdn.com/products/9781783986965/graphics/B01770_01_03.jpg)
->
-> 1. Ahhoz, hogy létrehozzunk egy vmet, kell egy img fájl
-> 2. nova megmondja, hogy mekkora mérettel hozzuk létrea VM-et
-> 3. A külső hálózat eléréséhez a neutron segít
-> 4. külső adat hozzárendelése ceilinderrel
-> 5. A keystone authentikál mindent és adja a biztonsági réteget
-> 6. a végfelhasználó egy horizonon keresztül fér hozzá
+> | ![opnstack parts](https://www.techplayon.com/wp-content/uploads/2018/11/Open-Stack-Components.png) | ![openstack](https://static.packt-cdn.com/products/9781783986965/graphics/B01770_01_03.jpg) |
+> | ------------- |:-------------:| 
+> 
+> 1. Ahhoz, hogy létrehozzunk egy VMet, kell egy `.img` fájl
+> 2. A `nova` megmondja, hogy mekkora mérettel hozzuk létre a VM-et
+> 3. A külső hálózat eléréséhez a `neutron` segít
+> 4. külső adat hozzárendelése `cinder`rel
+> 5. A `keystone` authentikál mindent és adja a biztonsági réteget
+> 6. a végfelhasználó a `horizon`on keresztül fér hozzá
 >  
 > ![](https://www.researchgate.net/profile/Shilpa-Sonawani/publication/305297793/figure/fig1/AS:394201872257025@1470996458219/Loosely-coupled-architecture-of-OpenStack.png)
 
 #### Keystone
-- token alapú katalógus szolgáltatások http frontenden keresztül
-- részletes beállításokat ad
-- domainek létrehozása
-  - lehet felhasználókat csoportokat projekteket defininálni
-  - egy felhashnáló több projekthez férhet hozzá, de egyszerre csak egyet használhat
-  - külső szerverrel is azonosíthatunk
-  - mindenkinek saját egyedi UUIDja van
-  - lehet user groupokat létrehozni amikre szabályokat alkalmazunk
-  - kvótákat is beálíthatunk egy-egy projekthez
-  - ![](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.58.09%20PM.png)
-  - katalógus/végpont elérést állíthatunk be
-
+> - token alapú katalógus szolgáltatások http frontenden keresztül
+> - részletes beállításokat ad
+> - domainek létrehozása
+>   - lehet felhasználókat csoportokat projekteket defininálni
+>   - egy felhashnáló több projekthez férhet hozzá, de egyszerre csak egyet használhat
+>   - külső szerverrel is azonosíthatunk
+>   - mindenkinek saját egyedi UUIDja van
+> - lehet `user group`okat létrehozni amikre szabályokat alkalmazunk
+> - kvótákat is beálíthatunk egy-egy projekthez
+> - katalógus/végpont elérést állíthatunk be
+> ![](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.58.09%20PM.png)
 
 ### GY4 ~ NOVA
 1. a user kér egy api hozzáférést
-2. a nova conductor eltárolja
-3. a nova scheduler létrehozza
-4. a nova compute létrehozza a vm-et és a nova compute kezeli is azt indítás/leállítás/stb
-5. rabbbitmq-server puffereli a kéréseket, és a komopőonenesek elévégzik amikor van rá szabad kapacitásuk.
+2. a `nova conductor` eltárolja
+3. a `nova scheduler` létrehozza
+4. a `nova compute` létrehozza a VM-et és kezeli is azt indítás/leállítás/stb
+5. `rabbbitmq-server` puffereli a kéréseket, és a komoponenesek elévégzik amikor van rá szabad kapacitásuk.
 
 - vmc proxy 
-- az egyes fizikai gépeken ott van a nova compute,és az kezeli, hogy egy Hyper-V vagy vmware vagy bármi más jól működjön és elfedve legyen a felsőbb réteg elől
+- az egyes fizikai gépeken ott van a `nova compute`, és az kezeli, hogy egy Hyper-V vagy VMware vagy bármi más jól működjön és elfedve legyen a felsőbb réteg elől
 
-![nova copmute macro](https://access.redhat.com/webassets/avalon/d/Red_Hat_OpenStack_Platform-13-Instances_and_Images_Guide-en-US/images/1323ccc0b16e5c84f0964b52b2abe8a9/openstack-libvirt-images.png)![nova compute](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uvhNH1UiYihr0AwbkPjDLThjTjPeiln-jyCTjfiXD0N0W5QAQkOftePkF370BE_K74k&usqp=CAU)
+| ![nova copmute macro](https://access.redhat.com/webassets/avalon/d/Red_Hat_OpenStack_Platform-13-Instances_and_Images_Guide-en-US/images/1323ccc0b16e5c84f0964b52b2abe8a9/openstack-libvirt-images.png) | ![nova compute](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2uvhNH1UiYihr0AwbkPjDLThjTjPeiln-jyCTjfiXD0N0W5QAQkOftePkF370BE_K74k&usqp=CAU) |
+|:---:|:---:|
 
 - VM törlése `Instaces`>`select all`>`delete`
 - privátkulcsgenerálás: `ssh-keygen -b 2048 -t rsa -f cloud-key`
 
 ### GY5 ~ NEUTRON
 https://docs.openstack.org/neutron/latest/
-> A hálózati elérést valósítja meg openstacken belül. 
+> **A hálózati elérést valósítja meg openstacken belül.**
 > 
 > teljes SDN (*software defined network*) hálózatot valósít meg
 
@@ -266,14 +264,12 @@ https://docs.openstack.org/neutron/latest/
 - **neutron-l3-agent** - layer3mas szolgáltatásokat virtualizál
  
 #### tűzfalazás
-> VM instancen belül egy OS fut amin van egy tűzfal amit konfigurálhatunk, ez VM specifikus szigroításokat tesz lehetővé
-> 
-> Az openstacknek van külön tűzfala is, amivel akár csoportoknak adhatunk szabályokat, stb
-
-1. create network
-   a. ha *shared* akkor több projekkt között is megosztható 
-3. subnet
-4. 
+> - VM instancen belül egy OS fut amin van egy tűzfal amit konfigurálhatunk, ez VM specifikus szigroításokat tesz lehetővé
+> - Az openstacknek van külön tűzfala is, amivel akár csoportoknak adhatunk szabályokat, stb
+>
+> 1. create network
+>    a. ha *shared* akkor több projekkt között is megosztható 
+> 3. subnet 
 
 ## EA5
 ### Glace
@@ -613,3 +609,16 @@ Ajánlott irodalom:
 > - `ls -alh`
 > - `docker images`
 
+-----
+
+# Záróvizsga tételek
+## 1. Felhőszámítási rendszerek alapjai: definíciók, szolgáltatási és kialakítási modellek, felhasználási mintázatok
+## 2. Felhőszámítási rendszerek alapjai: előnyök (felhasználói és szolgáltatói oldalról), technikai, üzleti és emberi tényezők
+## 3. OpenStack felhő: architektúra és alapvető működési mechanizmusok
+## 4. OpenStack Keystone: biztonsági jellemzők, alapkoncepciók és mechanizmusok
+## 5. OpenStack Nova és Glance: virtuális gépekre vonatkozó jellemzők, alapkoncepciók és mechanizmusok
+## 6. OpenStack Neutron: hálózati jellemzők, alapkoncepciók és mechanizmusok
+## 7. OpenStack Cinder és Swift: tárolási jellemzők, alapkoncepciók és mechanizmusok
+## 8. AWS IaaS megoldások (EC2 & tárolási szolgáltatások): jellemzők, alapkoncepciók és mechanizmusok (kifejezetten virtuális gépek menedzsmentjére vonatkozóan)
+## 9. Magas rendelkezésre állás, terheléselosztás és automatikus skálázás az AWS-ben
+## 10. Microsoft Azure / PaaS megoldások: jellemzők, alapkoncepciók és mechanizmusok (adatbázisok)
