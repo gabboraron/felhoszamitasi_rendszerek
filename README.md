@@ -69,7 +69,6 @@ A felhő egy modell, on-demand alapú, konfigurálható számítási kapacitáss
 | ------------- |:-------------:| 
 | Az openstacken létrehozott domainek között nincs átláthatóság | ![projekt alfelosztás](https://s3.amazonaws.com/madorn.com/images/ss.png)|
 | A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.| ![domain-projekt kapcsolat](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.04.26%20PM.png)|
-| Az openstacken létrehozott domainek között nincs átláthatóság | ![projekt alfelosztás](https://s3.amazonaws.com/madorn.com/images/ss.png)| |
 
 > A felhasználókhoz szerepeket köthetünk.
 > 
@@ -199,9 +198,8 @@ Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/
 
 **network bottlenecks:** kicsi a sávszél de sok adatom van amit fel szeretnék tenni, ekkor fizikailag elszállítjuk az adathordozót és átadjuk a felhő szolgáltatónak.
 
-| | |
-| ------------- |:-------------:| 
 | ![felhő1](https://www.computersciencezone.org/wp-content/uploads/2016/01/CloudFlavors.jpg) | ![felhő2](https://www.computersciencezone.org/wp-content/uploads/2015/04/cloud-computing.jpg)|
+| ------------- |:-------------:| 
 
 ## Openstack alapok
 > IaaS szinten nézve
