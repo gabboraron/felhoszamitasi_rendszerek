@@ -176,8 +176,8 @@ Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/
    - next: további metainformációk, *pl: hypervisor, python verzó, stb*
 3. frissítjük az oldalt és megjelenik az imagek között az új.
 
-## EA3
-### Felhő használatával szembeni aggályok:
+# EA3
+## Felhő használatával szembeni aggályok:
 > - másoknak adjuk át az adatainkat
 > - nincs meg a kontroll
 > - nem anonim
@@ -203,7 +203,7 @@ Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/
 | ------------- |:-------------:| 
 | ![felhő1](https://www.computersciencezone.org/wp-content/uploads/2016/01/CloudFlavors.jpg) | ![felhő2](https://www.computersciencezone.org/wp-content/uploads/2015/04/cloud-computing.jpg)|
 
-### Openstack alapok
+## Openstack alapok
 > IaaS szinten nézve
 > 
 > ![reminder cloud structure](https://www.researchgate.net/publication/327284357/figure/fig1/AS:664938364280832@1535545068694/Figure-3-NIST-cloud-computing-definition-40.png)
@@ -220,7 +220,7 @@ Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/
 >  
 > ![](https://www.researchgate.net/profile/Shilpa-Sonawani/publication/305297793/figure/fig1/AS:394201872257025@1470996458219/Loosely-coupled-architecture-of-OpenStack.png)
 
-#### Keystone
+### Keystone
 > - token alapú katalógus szolgáltatások http frontenden keresztül
 > - részletes beállításokat ad
 > - domainek létrehozása
@@ -233,7 +233,7 @@ Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/
 > - katalógus/végpont elérést állíthatunk be
 > ![](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.58.09%20PM.png)
 
-### GY4 ~ NOVA
+# GY4 ~ NOVA
 1. a user kér egy api hozzáférést
 2. a `nova conductor` eltárolja
 3. a `nova scheduler` létrehozza
@@ -249,7 +249,7 @@ Telepíthetjük az [ubuntu cloud image](http://cloud-images.ubuntu.com/releases/
 - VM törlése `Instaces`>`select all`>`delete`
 - privátkulcsgenerálás: `ssh-keygen -b 2048 -t rsa -f cloud-key`
 
-### GY5 ~ NEUTRON
+# GY5 ~ NEUTRON
 https://docs.openstack.org/neutron/latest/
 > **A hálózati elérést valósítja meg openstacken belül.**
 > 
@@ -263,62 +263,65 @@ https://docs.openstack.org/neutron/latest/
 - **neutron-dhcp-agent** - ez osztja ki a VM-eknek az ip címeket.
 - **neutron-l3-agent** - layer3mas szolgáltatásokat virtualizál
  
-#### tűzfalazás
+## tűzfalazás
 > - VM instancen belül egy OS fut amin van egy tűzfal amit konfigurálhatunk, ez VM specifikus szigroításokat tesz lehetővé
 > - Az openstacknek van külön tűzfala is, amivel akár csoportoknak adhatunk szabályokat, stb
 >
 > 1. create network
->    a. ha *shared* akkor több projekkt között is megosztható 
+>    a. ha *shared* akkor több projekt között is megosztható 
 > 3. subnet 
 
-## EA5
-### Glace
-![](https://www.oreilly.com/library/view/deploying-openstack/9781449311223/httpatomoreillycomsourceoreillyimages875415.png)
+# EA5 - Glance / Nova / Neutron
+## Glance
+> ![](https://www.oreilly.com/library/view/deploying-openstack/9781449311223/httpatomoreillycomsourceoreillyimages875415.png)
+> 
 > **hogy hozhatunk létre imaget:**
 > - openasack disk image builder
 > - haricorp
 > - VMware
-
+>
 > **image formátumok:**
-> - ISO - ISO9660 : hagyom-nyos lemez laapú
-> - VMDK - saját virtuális gép telepíttésekor vMware alatt
-> - VHD-VHDX: hyperV virtualizált formátuma
-> - RAW - nagy formátum, mindent tárol, sok üres helyet is
-
-Architektúra:
+> - `ISO` - `ISO9660`: hagyományos lemez alapú
+> - `VMDK` - saját virtuális gép telepítésekor VMware alatt
+> - `VHD` - `VHDX`: HyperV virtualizált formátuma
+> - `RAW` - nagy formátum, mindent tárol, sok üres helyet is
+>
+> **Architektúra:**
 > ![](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/b0ea275a-efab-4185-9c48-6109ceb2da94.jpg)
 
-### Nova
-> különböző hypervisorokkal múködik a nova hyper V, vmware, stb..
->
+## Nova
+> - különböző hypervisorokkal múködik a nova `HyperV`, `VMware`, stb..
+> - mindig a már foglalt serverre rakja, ha tudja
+> 
 > ![](https://www.oreilly.com/library/view/deploying-openstack/9781449311223/httpatomoreillycomsourceoreillyimages875419.png)
-> mindig a már foglalt sefrverre rakja, ha tudja
 
-### Neutron
-- Horizonon keresztül kezelhetjük
-![](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/9cb27fc5-b634-4e7b-b1b6-efc68476674e.jpeg)
-- neutron server bonyoslítja a kapcsolatot a fizikai és virtuális illetv virtuális-virtuális világ között
-- dhcp: a szokásos
-- l3: routerek
-- bridge: szokásos hálózatis bridge
 
-## GY6 - Cinder
-> Digitális köteteket hozhatunk létre amiketblock storage szinte tudunk felmountolni.
+## Neutron
+> ![](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/9cb27fc5-b634-4e7b-b1b6-efc68476674e.jpeg)
+> 
+> - Horizonon keresztül kezelhetjük
+> - neutron server bonyoslítja a kapcsolatot a fizikai és virtuális illetv virtuális-virtuális világ között
+> - dhcp: a szokásos
+> - l3: routerek
+> - bridge: szokásos hálózatis bridge
+
+# GY6 - Cinder
+> Digitális köteteket hozhatunk létre amiket `block storage` szinten tudunk felmountolni.
 >
-> A compute nodeokban kicsia tároló kapacitás alapvetően, de vannak compute nodeok és strage nodeok is, és ezeket vonjuk össze. Ez az ***e**lastic **b**lock **s**otorage*. Ez jelenik meg *sdc* partició néven. Az I/O műveletek sebesssége kétséges.
+> A `compute node`okban kicsi a tároló kapacitás alapvetően, de vannak compute nodeok és strage nodeok is, és ezeket vonjuk össze. Ez az ***e**lastic **b**lock **s**otorage*. Ez jelenik meg *sbc* partició néven. Az I/O műveletek sebessége kétséges.
+> 
+> Ezzel a megoldással a `compute node`on is tárolunk és a `storage node`on is tárolunk adatot. A `compute node`on csak annyit amennyi épp szükséges
 > 
 > ![storage network](http://platform9.com/wp-content/uploads/2015/12/Cinder-1-1-1024x559.png)
-> 
-> Ezzel a megoldással a compute nodeon is tárolunk mega storage nodeon is tárolunk adatot. A compute nodeon csak anynit amennyi épp szükséges
 
-Mindne volumenak van egy azonosítója, mennyi adat tárolható, ki hozta létre, stb metaadatattal, A *cinder-scheduler* dönti el mennyi hely áll még rendelkezésünkre. A *cinder-volume* viszonty minden szerveren futni fog, ez ekrül be mindne VM-hez. A *cinder-backup*ban a vloumeokról készíthetünk backupot.
+Minden volumenak van egy azonosítója, mennyi adat tárolható, ki hozta létre, stb metaadatattal, A *cinder-scheduler* dönti el mennyi hely áll még rendelkezésünkre. A *cinder-volume* viszont minden szerveren futni fog, ez kerül be minden VM-hez. A *cinder-backup*ban a volumeokról készíthetünk backupot.
 
 ![](https://accelazh.github.io/images/cinder-architecture.png)
 
 ![](https://image.slidesharecdn.com/storagebasedonopenstackmariocho-160220082601/95/storage-based-onopenstackmariocho-23-638.jpg?cb=1455958139)![](https://wiki.openstack.org/w/images/thumb/b/bb/SharedLVMsupport.png/600px-SharedLVMsupport.png)
 
-Cinderen belül tudunk 
-- *volumeokat*: definiálni, ezek az egyes storage gépekhez tartozak, kb mint egy tradicionális harddrive. Ezeket felmountolhatjuk, vagy akár külön VMként is használhatjuk.
+**Cinderen belül tudunk**
+- *volumeokat*: definiálni, ezek az egyes storage gépekhez tartozak, kb mint egy tradicionális hard drive. Ezeket felmountolhatjuk, vagy akár külön VMként is használhatjuk.
 - *snapshot*: a VMről készítünk egy másolatot, technikailag ez is egy volume, de nincs felmountolva!
 - *backup*: egy tömörített formátuma a volumenak.
 
@@ -327,48 +330,51 @@ sudo mkfs.ext3 dev/vdb
 sudo mount dev/vdb mnt
 ```
 
-## EA6 Cinder és swift
+# EA6 ~ Cinder és swift
 Ha a virtuális gépet hackertámadás éri/leáll akkor a fájlok kvázi elvesztek a külső világ számára.
 
-**=>** csináljunk egy perzisztens tárolót block objektúmok tárolására. 
-- a felhasználó megmondja hány kötetre, mekkora tárolási területtre van szüksége a VMhez, és ezt mountoljuk mint egy hagyományos adathordozót a VM-re
-- de így a storage network köti össze ezkeet aminél magas lesz a latency
+**=>** csináljunk egy perzisztens tárolót *block objektum*ok tárolására. 
+- a felhasználó megmondja hány kötetre, mekkora tárolási területre van szüksége a VMhez, és ezt mountoljuk mint egy hagyományos adathordozót a VM-re
+- de így a `storage network` köti össze ezeket aminél magas lesz a latency
 
-![storage and compute nodes cinder](http://platform9.com/wp-content/uploads/2015/12/Cinder-1-1-1024x559.png)![openstack block diagram block storage](https://docs.openstack.org/project-deploy-guide/openstack-ansible/ocata/_images/production-storage-cinder.png)
+![storage and compute nodes cinder](http://platform9.com/wp-content/uploads/2015/12/Cinder-1-1-1024x559.png)
 
->  cinder kötet szinten kezeli a fájlokt
+## Cinder
+> ![openstack block diagram block storage](https://docs.openstack.org/project-deploy-guide/openstack-ansible/ocata/_images/production-storage-cinder.png)
+> 
+>  A `cinder` kötet szinten kezeli a fájlokat
+>
+> - **cinder-api**:ezen át kommunikál a cinderrel a user
+> - **rabbitmq server**: összeköti az apit a schedulerel
+> - **cinder-scheduler**: a storage nodeot kezeli gyakorlatilag
+> - **cinder- volume**: ez manageli a köteteket
+> - **cinder backup**: egy-egy kötetet mint objektumot lehet átteni a swiftbe
+>
+> ### Cinder használt technológiái
+>> - LVM: ezzel hozunk létre logikai köteteket amik már felhasználhatóak lesznek a sinderrel egy NetApp
+>> - NFS: sriverekkel lehet cindereket létrehozni
+>
+> ### Cinder concepts
+>> - volume: a raw tárolt block amit a Nován használunk
+>> - snapshot: adott pillanatban készített másolat a kötet tartalmáról, ez az épp elérrhető állapotban levő kötetekről készíthető
+>> - backup: archiváltuk, tömörítve, akár másik felhőn vagy fizikailag nálunk  van
+> 
+> ### Object storage
+>> - távioli storage ami ftp szerverekhez ad hozzáférést, vagy dropbox/pinterest/stb oldlak háttere.
+>> - lehet adott időre megadni a tárolási jogot, és utána töröljük
 
-- cinder-api:ezen át kommunikál a cinderrel a user
-- rabbitmq server: összeköti az apit a schedulerel
-- sinder-scheduler: a storage nodeot kezeli gyakorlatilag
-- cinder- volume: ez manageli a köteteket
-- cinder backup: egy-egy kötetet mint objektumot lehet átteni a swiftb
-
-### Cinder használt technológiái
-- LVM: ezzel hozunk létre logikai köteteket amik már felhasználhatóak lesznek a sinderrel egy NetApp
-- NFS: sriverekkel lehet cindereket létrehozni
-
-### Cinder concepts
-- volume: a raw tárolt block amit a Nován használunk
-- snapshot: adott pillanatban készített másolat a kötet tartalmáról, ez az épp elérrhető állapotban levő kötetekről készíthető
-- backup: archiváltuk, tömörítve, akár másik felhőn vagy fizikailag nálunk  van
-
-### Object storage
-- távioli storage ami ftp szerverekhez ad hozzáférést, vagy dropbox/pinterest/stb oldlak háttere.
-- lehet adott időre megadni a tárolási jogot, és utána töröljük
-
-### Swift
+## Swift
 > minden egy objektum, nincs fájlrendszer
+>
+> - access control list 
+> - static webhost
+> - admin
 
-- access control list 
-- static webhost
-- admin
+> - **object server**: a swift clusteren kezelt objektumokat kezeli
+> - **auditor**: a felső manager, az objektumokat is kezeli, egy sqllite adatbázisba tesi a bejárt állományokat
+> - **object expirer**: időzített törléekkel foglalkozik
 
-> - object server: a swift clusteren kezelt objektumokat kezeli
-> - auditor: a felső manager, az objektumokat is kezeli, egy sqllite adatbázisba tesi a bejárt állományokat
-> - object expirer: időzített törléekkel foglalkozik
-
-## GY7 Swift vs volume
+# GY7 Swift vs volume
 - `sudo fdisk -l` 
 - `df -h`
 - `sudo mkfs.ext3 dev/vdb` fájlrendszer létrehozása a disken
@@ -376,7 +382,7 @@ Ha a virtuális gépet hackertámadás éri/leáll akkor a fájlok kvázi elvesz
 - `sudo mount dev/vdb mnt/` felmountoljuk a dev/vdb -t az mnt alá
 - `sudo touch mnt/test_file.txt` <- így a tárolt adatok perzisztensen maradnak a felhőben
 
-Az adattárolási megoldások a háttérben egy blockdevicet használnak.Az object store inkább egy újabb, de eléggé feladat specifikus megoldásként használhatóak.
+Az adattárolási megoldások a háttérben egy `block device`t használnak. Az `object store` inkább egy újabb, de eléggé feladat specifikus megoldásként használhatóak.
 
 > **Konténerek:** egy mappa amikben több objektumot (fájlokat) tudunk eltárolni.
 - `sat openrc`
@@ -398,93 +404,92 @@ Az adattárolási megoldások a háttérben egy blockdevicet használnak.Az obje
 ## EA7 - AWS, EC2, S3
 https://azure.microsoft.com/en-us/free/students/
 
-- AWS, EC2 - számítási szolgáltatás 
-- S3 - tárolási
+- `AWS`, `EC2` - számítási szolgáltatás 
+- `S3` - tárolási
 
 **IaaS szint**
-|         |            | 
-| ------------- |:-------------:| 
 | ![https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png](https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png)      | ![](https://cloud.netapp.com/hs-fs/hubfs/QWERTYUIUIOPOP.png?width=600&name=QWERTYUIUIOPOP.png) |
+| ------------- |:-------------:| 
 
-https://cloud.netapp.com/blog/understanding-aws-high-availability-compute-sql-and-storage
+[AWS High Availability: Compute, SQL and Storage](https://cloud.netapp.com/blog/understanding-aws-high-availability-compute-sql-and-storage)
 
-Azért kell nagy ram a vmekhez mert a DB server ramban tartja a DB-t, hogy gyorsabb legyen a lekérdezés.
+Azért kell nagy ram a VMekhez mert a DB server ramban tartja a DB-t, hogy gyorsabb legyen a lekérdezés.
 
 ### Amazon elastic compute cloud (EC2)
-![EC2 lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/ami_lifecycle.png)
-
-1. kiválasztjuk mi az os
-2. instence type
-3. instence konfigurálás
-   -btiz4tési modellek 
-4. tárhyel hozzáadása
-5. portok megadása
-6. security group
-7. elasztikus IP megadása
-
-https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf
+> ![EC2 lifecycle](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/images/ami_lifecycle.png)
+> 
+> 1. kiválasztjuk mi az os
+> 2. instence type
+> 3. instence konfigurálás
+>    -biztonsági modellek 
+> 4. tárhely hozzáadása
+> 5. portok megadása
+> 6. security group
+> 7. elasztikus IP megadása
+>
+> ajánlott irodalom: [Cloud Computing Bible](https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf)
 
 ## GY8 - Heat orchestration service
-> **felhőfüggő megoldás:** csinálunk egy leíró fájlt *(infrastructure as a code)* és azt adjuk oda az értlemezőnek vm létrehozásához, így automatizáljuk a folyamatot
+> **felhőfüggő megoldás:** csinálunk egy leíró fájlt *(infrastructure as a code)* és azt adjuk oda az értelmezőnek VM létrehozásához, így automatizáljuk a folyamatot
 >
 > **felhőfüggetlen megoldás:** külső eszközökkel hozzuk létre a fájlt, amik sok esetben más szolgltatásokat is adnak.
-
-- `heat api`
-- `heat api cfn` 
-- `heat engine`
-
-![heat orchestrator](https://cloudinfrastack.com/articles_img/openstack_02.jpg)
-
-`.yaml` fájlokkal definiljuk: megadjuk a `paraméter`eket, `servereket`, `volumeattach`, `output`:
-- **`paraméter`**: *string*, *description* itt változókat hozunk létre
-- **`resources`**: *string*; *type* - `OS::Nova::Server` - ezzel egy openstack novával létrehozunk egy szerver VM-et; *properties*: név, image fájl, network amihez csatlakozik; *volumeattach1*: megadjuk, hogy melyik volumeot csatoljuk fel a VMhez
-
-> nem feladat az, hogy miképp fut le a az erőforrás, a konfig menedzsmentnek meg nem feladat az erforrás létrehozása, ilylen tool pl a cloud init
+> 
+> - `heat api`
+> - `heat api cfn` 
+> - `heat engine`
+>
+> ![heat orchestrator](https://cloudinfrastack.com/articles_img/openstack_02.jpg)
+>
+> `.yaml` fájlokkal definiljuk: megadjuk a `paraméter`eket, `servereket`, `volumeattach`, `output`:
+> - **`paraméter`**: *string*, *description* itt változókat hozunk létre
+> - **`resources`**: *string*; *type* - `OS::Nova::Server` - ezzel egy openstack novával létrehozunk egy szerver VM-et; *properties*: név, image fájl, network amihez csatlakozik; *volumeattach1*: megadjuk, hogy melyik volumeot csatoljuk fel a VMhez
+>
+> nem feladat az, hogy miképp fut le a az erőforrás, a konfig menedzsmentnek meg nem feladat az erforrás létrehozása, ilyen tool pl a cloud init
 
 ## EA8 - high availability - load balancing - autoscaling patterns (AWS)
 > ajánlott irodalom: [Implementing Cloud Design Patterns for AWS](https://www.oreilly.com/library/view/implementing-cloud-design/9781782177340/)
 
-Mi an agy rendelkezésre állás:
+Mi a *nagy rendelkezésre állás*:
 - **rendelkezésre állás:** a rendszer reszponzivitása *(hogy kapjunk választ a kérdésekre)* nagyon fontos => ***néma gyereknek anyja se érti a szavát***
     - **monolitikus rendszer**eken nehezen megvalósítható
     - **multiserver - multi database rendszer** megnöveli a rendszer rendelkezésre állását
 ![AWS implementation - load balancer -ec2 instances](https://d2908q01vomqb2.cloudfront.net/da4b9237bacccdf19c0760cab7aec4a8359010b0/2019/10/06/illustration-2.png)
 
 ### Multiserver 
->#### 1. EC2 instance
+> #### 1. EC2 instance
 > 1. végy egy linux servert
 > 2. SSH-n konfiguráljuk
 >    - *ehhez saját észrevételek:*
->    - *hozz létre virtuálsi hálózatot (VPC) [e szerint a leírás szerint](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateVPC.html#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2), persze válaszd ki előbb melyik opció kell neked ebből mert itt sok féle van, van dbhez is meg ec2höz is*
+>    - *hozz létre virtuális hálózatot (VPC) [e szerint a leírás szerint](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateVPC.html#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2), persze válaszd ki előbb melyik opció kell neked ebből mert itt sok féle van, van dbhez is meg ec2höz is*
 >     - *én nem csak inboundnak hanem outnak is megcsinaáltam mindent mert inbundként nem ment, ileltve mindnehova `0.0.0.0`-t adtam meg, mert úgy működött, ha saját IPt használtam akkor nem, de valszeg más volt az oka, szóval működnie kell saját ipvel is az SSH-s résznél* 
 >     - *az ec2-t hozd létre [e szerint](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html)*
->     - *amikor beshzol PUTTYal akkor azt [e szerint tudod](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) és itt usernek nem azt az `i-akármi`t adod ahogy írja hanem [ebből a listából](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY) kiválasztod ami a te VM-ed és azzal be tudsz lépni. a többi lépést kövesd a leírás szerint és akkor oké.*
+>     - *amikor beSSHzol PUTTYal akkor azt [e szerint tudod](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) és itt usernek nem azt az `i-akármi`t adod ahogy írja hanem [ebből a listából](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY) kiválasztod ami a te VM-ed és azzal be tudsz lépni. a többi lépést kövesd a leírás szerint és akkor oké.*
 >
 > #### 2. ELB létrehozása - elastic low balance server *(terhelés elosztó)*
-> 1. megadjuk a portot 
-> 2. megadhatunk helth chakcet, hogy ellenőrizze a kapcsoaltot az instanceokhoz, itt trasholdot is megadhatunk a betöltésekhez
-> 3. megadjuk az ec2 instanceot az ELB alá.
-> 4. status chack - ellenőrizzük az instanceok állapotát (fut/nem fut stb)
+> 1. megadjuk a **port**ot 
+> 2. megadhatunk **helth chakc**et, hogy ellenőrizze a kapcsolatot az instanceokhoz, itt trasholdot is megadhatunk a betöltésekhez
+> 3. megadjuk az **EC2 instance**ot az ELB alá.
+> 4. **status chack** - ellenőrizzük az instanceok állapotát (fut/nem fut stb)
 >
 > #### 3. clone EC2
 > klónozzuk akár virtualboxnál
 > 
->#### 4. Új instance hozzáadása az ELB-hez
+> #### 4. Új instance hozzáadása az ELB-hez
 > hozzáadunk akárhány újat.
 > 
->#### 5. Tesztelünk
+> #### 5. Tesztelünk
 > tesztelhetünk az AWS consolon, vagy 
->
+
 ### Multidata center pattern
-> kihejezhetjük több zónába a rendszert í]y karbantartáskor sem áll le.
+> kihelyezhetjük több zónába a rendszert így karbantartáskor sem áll le.
 
 ### Auto scaleing pattern
 ![aws autoscaling pattern](https://static.packt-cdn.com/products/9781782177340/graphics/7340OT_02_08.jpg)
-> https://subscription.packtpub.com/book/web-development/9781782177340/2/ch02lvl1sec17/scale-out-pattern
+> [Scale out pattern](https://subscription.packtpub.com/book/web-development/9781782177340/2/ch02lvl1sec17/scale-out-pattern)
 >
 > Egy `Cloud watch` ha túlterhelődik az instance szól az `Autoscaling group`nak ami létrehoz egy új isntanceot az ELB-n
 > 
-> **1. lounch config**
+> **1. launch config**
 > **2. cloudWatch beállítása**
 >    ```yaml
 >    #!/bin/bash
@@ -501,7 +506,7 @@ Mi an agy rendelkezésre állás:
 >    echo welcome > /var/www/html/index.html
 >    service httpd start
 >    ```
->    a `request stop instances` beállításával licitálunk a kihasználatlan rendszerkapacitásért.Olcsóbb példányokat kapunk, ha nyerünk a liciten, de a legtöbbet ajánló kapja meg.
+>    a `request stop instances` beállításával licitálunk a kihasználatlan rendszerkapacitásért. Olcsóbb példányokat kapunk, ha nyerünk a liciten, de a legtöbbet ajánló kapja meg.
 >    
 > **4. autoskálázási csoport létrehozása**
 >    - megadhatjuk, hogy hány isntanceon induljon a csoport
@@ -527,8 +532,8 @@ Ajánlott irodalom:
 > Platform as a Service model: *valahol a felhőben úgy futtatunk szolgáltatásokat, hogy a felhő egyéb szolgáltatsáokt integrál alá, pl SQL adaatbázis, ahol nem látjuk milyen VM fut alatta, csak azt, hogy tudunk lekérdezést indítani.*
 
 ### Számítási szolgáltatások - IaaS
-> - A Microsoft ellsődlegesen a saját virtualizációs technikáját használja, ez a HyperV.
-> - load balancer engedi rá a felhasználót a VM-ekre.
+> - A Microsoft elsődlegesen a saját virtualizációs technikáját használja, ez a HyperV.
+> - `load balancer` engedi rá a felhasználót a VM-ekre.
 > 
 > #### Azure websites
 > *IIS (Internet Information Server)* kommunikál a tárolóval.
@@ -551,7 +556,7 @@ Ajánlott irodalom:
 > 
 > **DTU**: Data Transaction Unit, egy tranzakció objektuma, benne az írási/olvasási műveletekkel. Az adatbázis "jóságának" mértékegyége, hogy hány műveletet tud végrehajtani teljes terhelés alatt, azaz hány DTU-ra képes
 > 
-> **eDTU**: elasztikus DTU, azaz egy adatbázisom van, de időnként nagyobb terhelést kap mint máskor, ekkor egy poolt hozunk létre az adatbázisainkból és ezekre hasnálunk különböző standardokat:
+> **eDTU**: elasztikus DTU, azaz egy adatbázisom van, de időnként nagyobb terhelést kap mint máskor, ekkor egy poolt hozunk létre az adatbázisainkból és ezekre használunk különböző standardokat:
 > - basic: 0-5 eDTU
 > - standard: 100-1200 eDTU
 > - premium: 125-1500 eDTU
@@ -564,9 +569,8 @@ Ajánlott irodalom:
 > ![nist model of cloud computing](https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png)
 
 ## GY10 - Docker I
-|         |            |   |
-| ------------- |:-------------:| -----:|
 | ![](https://docs.docker.com/engine/images/architecture.svg)| ![](https://images.contentstack.io/v3/assets/blt300387d93dabf50e/bltb6200bc085503718/5e1f209a63d1b6503160c6d5/containers-vs-virtual-machines.jpg) | ![](https://docs.docker.com/storage/images/types-of-mounts-volume.png) |
+| ------------- |:-------------:| -----:|
 
 > ***Ha a konténer futó progrmja bezárul akkor a konténer is bezárul!***
 
@@ -578,9 +582,8 @@ Ajánlott irodalom:
 > - buildelés: `docker image build [path]`
 > - `-d` detached
 > - `--rm` remove
-> - ``
 > 
-> Nem törölhetünk docker imaget amíg konténer hivatkozik rá!
+> ***Nem törölhetünk docker imaget amíg konténer hivatkozik rá!***
 > 
 > **takarítás:**
 > 1. töröljünk kontéreket: `docker container prune`
