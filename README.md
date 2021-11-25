@@ -255,11 +255,11 @@ https://docs.openstack.org/neutron/latest/
 
 ![projectnetwork-phisicalnetwork](https://docs.openstack.org/neutron/latest/_images/NetworkTypes.png)![intenet-vm connection](https://docs.openstack.org/ocata/install-guide-ubuntu/_images/network2-overview.png)
 
-- **NeutronDatabes** - itt tároljuk a network, stb specifikus információkat
-- **neutronlinuxbradge-agent** - két virtualizált server közötti kommunikációt old meg az `A` virtuális gép és a `B` virtuális gép között az `A` fizikai gép fizikai interfésze és `B` fizikai gép fizikai interfésze közötti kapcsolatot oldja meg.
+- **NeutronDatabase** - itt tároljuk a network, stb specifikus információkat
+- **neutron-linuxbridge-agent** - két virtualizált server közötti kommunikációt old meg az `A` virtuális gép és a `B` virtuális gép között az `A` fizikai gép fizikai interfésze és `B` fizikai gép fizikai interfésze közötti kapcsolatot oldja meg.
   - a **nova compute**tal együtt csinálja az egészet.
 - **neutron-dhcp-agent** - ez osztja ki a VM-eknek az ip címeket.
-- **neutron-l3-agent** - layer3mas szolgáltatásokat virtualizál
+- **neutron-l3-agent** - [`layer3`](https://www.infoblox.com/glossary/layer-3-of-the-osi-model-network-layer/)mas szolgáltatásokat virtualizál => quality of service-t biztosít
  
 ## tűzfalazás
 > - VM instancen belül egy OS fut amin van egy tűzfal amit konfigurálhatunk, ez VM specifikus szigroításokat tesz lehetővé
@@ -298,7 +298,7 @@ https://docs.openstack.org/neutron/latest/
 > ![](https://www.oreilly.com/library/view/preparing-for-the/9781787288416/assets/9cb27fc5-b634-4e7b-b1b6-efc68476674e.jpeg)
 > 
 > - Horizonon keresztül kezelhetjük
-> - neutron server bonyoslítja a kapcsolatot a fizikai és virtuális illetv virtuális-virtuális világ között
+> - neutron server bonyolítja a kapcsolatot a fizikai és virtuális illetve virtuális-virtuális világ között
 > - dhcp: a szokásos
 > - l3: routerek
 > - bridge: szokásos hálózatis bridge
@@ -349,13 +349,13 @@ Ha a virtuális gépet hackertámadás éri/leáll akkor a fájlok kvázi elvesz
 > - **cinder backup**: egy-egy kötetet mint objektumot lehet átteni a swiftbe
 >
 > ### Cinder használt technológiái
->> - LVM: ezzel hozunk létre logikai köteteket amik már felhasználhatóak lesznek a sinderrel egy NetApp
->> - NFS: sriverekkel lehet cindereket létrehozni
+>> - **LVM**: ezzel hozunk létre logikai köteteket amik már felhasználhatóak lesznek a sinderrel egy NetApp
+>> - **NFS**: driverekkel lehet cindereket létrehozni
 >
 > ### Cinder concepts
->> - volume: a raw tárolt block amit a Nován használunk
->> - snapshot: adott pillanatban készített másolat a kötet tartalmáról, ez az épp elérrhető állapotban levő kötetekről készíthető
->> - backup: archiváltuk, tömörítve, akár másik felhőn vagy fizikailag nálunk  van
+>> - **volume**: a raw tárolt block amit a Nován használunk
+>> - **snapshot**: adott pillanatban készített másolat a kötet tartalmáról, ez az épp elérrhető állapotban levő kötetekről készíthető
+>> - **backup**: archiváltuk, tömörítve, akár másik felhőn vagy fizikailag nálunk  van
 > 
 > ### Object storage
 >> - távioli storage ami ftp szerverekhez ad hozzáférést, vagy dropbox/pinterest/stb oldlak háttere.
@@ -369,7 +369,7 @@ Ha a virtuális gépet hackertámadás éri/leáll akkor a fájlok kvázi elvesz
 > - admin
 
 > - **object server**: a swift clusteren kezelt objektumokat kezeli
-> - **auditor**: a felső manager, az objektumokat is kezeli, egy sqllite adatbázisba tesi a bejárt állományokat
+> - **auditor**: a felső manager, az objektumokat is kezeli, egy sqllite adatbázisba teszi a bejárt állományokat
 > - **object expirer**: időzített törléekkel foglalkozik
 
 # GY7 Swift vs volume
@@ -430,7 +430,7 @@ Azért kell nagy ram a VMekhez mert a DB server ramban tartja a DB-t, hogy gyors
 ## GY8 - Heat orchestration service
 > **felhőfüggő megoldás:** csinálunk egy leíró fájlt *(infrastructure as a code)* és azt adjuk oda az értelmezőnek VM létrehozásához, így automatizáljuk a folyamatot
 >
-> **felhőfüggetlen megoldás:** külső eszközökkel hozzuk létre a fájlt, amik sok esetben más szolgltatásokat is adnak.
+> **felhőfüggetlen megoldás:** külső eszközökkel hozzuk létre a fájlt, amik sok esetben más szolgáltatásokat is adnak.
 > 
 > - `heat api`
 > - `heat api cfn` 
@@ -438,7 +438,7 @@ Azért kell nagy ram a VMekhez mert a DB server ramban tartja a DB-t, hogy gyors
 >
 > ![heat orchestrator](https://cloudinfrastack.com/articles_img/openstack_02.jpg)
 >
-> `.yaml` fájlokkal definiljuk: megadjuk a `paraméter`eket, `servereket`, `volumeattach`, `output`:
+> `.yaml` fájlokkal definiáljuk: megadjuk a `paraméter`eket, `servereket`, `volumeattach`, `output`:
 > - **`paraméter`**: *string*, *description* itt változókat hozunk létre
 > - **`resources`**: *string*; *type* - `OS::Nova::Server` - ezzel egy openstack novával létrehozunk egy szerver VM-et; *properties*: név, image fájl, network amihez csatlakozik; *volumeattach1*: megadjuk, hogy melyik volumeot csatoljuk fel a VMhez
 >
@@ -459,15 +459,15 @@ Mi a *nagy rendelkezésre állás*:
 > 2. SSH-n konfiguráljuk
 >    - *ehhez saját észrevételek:*
 >    - *hozz létre virtuális hálózatot (VPC) [e szerint a leírás szerint](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateVPC.html#CHAP_Tutorials.WebServerDB.CreateVPC.SecurityGroupEC2), persze válaszd ki előbb melyik opció kell neked ebből mert itt sok féle van, van dbhez is meg ec2höz is*
->     - *én nem csak inboundnak hanem outnak is megcsinaáltam mindent mert inbundként nem ment, ileltve mindnehova `0.0.0.0`-t adtam meg, mert úgy működött, ha saját IPt használtam akkor nem, de valszeg más volt az oka, szóval működnie kell saját ipvel is az SSH-s résznél* 
+>     - *én nem csak inboundnak hanem outnak is megcsináltam mindent mert inbundként nem ment, ileltve mindnehova `0.0.0.0`-t adtam meg, mert úgy működött, ha saját IPt használtam akkor nem, de valszeg más volt az oka, szóval működnie kell saját ipvel is az SSH-s résznél* 
 >     - *az ec2-t hozd létre [e szerint](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Tutorials.WebServerDB.CreateWebServer.html)*
 >     - *amikor beSSHzol PUTTYal akkor azt [e szerint tudod](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html) és itt usernek nem azt az `i-akármi`t adod ahogy írja hanem [ebből a listából](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html#TroubleshootingInstancesConnectingPuTTY) kiválasztod ami a te VM-ed és azzal be tudsz lépni. a többi lépést kövesd a leírás szerint és akkor oké.*
 >
 > #### 2. ELB létrehozása - elastic low balance server *(terhelés elosztó)*
 > 1. megadjuk a **port**ot 
-> 2. megadhatunk **helth chakc**et, hogy ellenőrizze a kapcsolatot az instanceokhoz, itt trasholdot is megadhatunk a betöltésekhez
+> 2. megadhatunk **health check**et, hogy ellenőrizze a kapcsolatot az instanceokhoz, itt trasholdot is megadhatunk a betöltésekhez
 > 3. megadjuk az **EC2 instance**ot az ELB alá.
-> 4. **status chack** - ellenőrizzük az instanceok állapotát (fut/nem fut stb)
+> 4. **status check** - ellenőrizzük az instanceok állapotát (fut/nem fut stb)
 >
 > #### 3. clone EC2
 > klónozzuk akár virtualboxnál
@@ -476,7 +476,7 @@ Mi a *nagy rendelkezésre állás*:
 > hozzáadunk akárhány újat.
 > 
 > #### 5. Tesztelünk
-> tesztelhetünk az AWS consolon, vagy 
+> tesztelhetünk az AWS consoleon
 
 ### Multidata center pattern
 > kihelyezhetjük több zónába a rendszert így karbantartáskor sem áll le.
@@ -510,12 +510,12 @@ Mi a *nagy rendelkezésre állás*:
 >    - megadhatjuk, hogy hány isntanceon induljon a csoport
 >    - adhatunk alhálózatot
 >    - load balancert állítunk be
->    - helth check típusát is mgeadhatjuk
+>    - health check típusát is mgeadhatjuk
 >    
 > **5. sklázási irányleveket adhatunk meg**
 >    - megadhatjuk hány példány között skálázódik 
->    - risasztásokat hozhatunk létre amikt példányokhoz rendelhetjük, *pl: ha 5 percen keresztül a memóra használat x fölé emelkedik szól*  
->    - skálázási csoportokat is megadhatunk amik a riasztásokra váalaszolva pl kikapcsolják az adott túlterhelt VM-et
+>    - riasztásokat hozhatunk létre amiket példányokhoz rendelhetjük, *pl: ha 5 percen keresztül a memóra használat x fölé emelkedik szól*  
+>    - skálázási csoportokat is megadhatunk amik a riasztásokra válaszolva pl kikapcsolják az adott túlterhelt VM-et
 >    - *60s szabály*
 
 ## EA9 - Microsoft Azure
@@ -523,7 +523,7 @@ Ajánlott irodalom:
 - [Barrie Sosinsky - cloud computing bible](https://arpitapatel.files.wordpress.com/2014/10/cloud-computing-bible1.pdf)
 - [Windows Azure lépésről lépésre](https://docplayer.hu/730732-Windows-azure-lepesrol-lepesre.html)
 
-> platform szolgltatóként az egyik legerősebb
+> platform szolgáltatóként az egyik legerősebb
 > 
 > ![azure services](https://mountainss.files.wordpress.com/2016/06/azure-services.jpg)
 > 
@@ -539,7 +539,7 @@ Ajánlott irodalom:
 > 
 
 ### Adatkezelés
-> *felhasznál* szempontjából nézve:
+> *felhasználó* szempontjából nézve:
 > 1. load balancer/web role instance
 > 2. quee
 > 3. worker roles
@@ -561,7 +561,7 @@ Ajánlott irodalom:
 
 ### Networking
 ### IT szolgáltatások
-> ![services](![](https://i.pinimg.com/736x/15/6c/79/156c79e7f1a08575169d5b316940ca94.jpg))
+> ![services](https://i.pinimg.com/736x/15/6c/79/156c79e7f1a08575169d5b316940ca94.jpg)
 ### CDN
 ### [HADOOP](https://hadoop.apache.org/) - Bigdatához
 > ![nist model of cloud computing](https://www.researchgate.net/publication/299982137/figure/fig1/AS:350755232993286@1460637972927/NIST-Visual-model-of-cloud-computing-definition.png)
