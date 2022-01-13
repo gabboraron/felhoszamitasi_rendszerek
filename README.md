@@ -67,8 +67,8 @@ A felhő egy modell, on-demand alapú, konfigurálható számítási kapacitáss
 
 | | |
 | ------------- |:-------------:| 
-| Az openstacken létrehozott domainek között nincs átláthatóság | ![projekt alfelosztás](https://s3.amazonaws.com/madorn.com/images/ss.png)|
-| A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.| ![domain-projekt kapcsolat](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.04.26%20PM.png)|
+| Az openstacken létrehozott domainek között nincs átláthatóság | ![domain-projekt kapcsolat](https://s3.amazonaws.com/madorn.com/images/Screen%20Shot%202014-01-08%20at%201.04.26%20PM.png)|
+| A domaineken belül hozunk létre projekteket amikhez hozzárendelünk erőforrásokat. Ezekhez a projektekhez rendelhetünk usereket.| ![projekt alfelosztás](https://s3.amazonaws.com/madorn.com/images/ss.png)|
 
 > A felhasználókhoz szerepeket köthetünk.
 > 
